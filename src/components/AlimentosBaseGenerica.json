@@ -1,0 +1,109 @@
+[
+  "baseAlimentos",
+  [
+    {
+      "id": "1738171888982",
+      "nombre": "Alfalfa heno",
+      "ms": 86,
+      "ce": 2,
+      "pb": 15.8,
+      "clase": "forraje"
+    },
+    {
+      "id": "1738016387812",
+      "nombre": "Alfalfa pastoreo",
+      "ms": 23,
+      "ce": 2.26,
+      "pb": 21.5,
+      "clase": "forraje"
+    },
+    {
+      "id": "1738499181080",
+      "nombre": "Alfalfa silo",
+      "ms": 41,
+      "ce": 2.03,
+      "pb": 16,
+      "clase": "forraje"
+    },
+    {
+      "id": "1738021690110",
+      "nombre": "Algodón semilla",
+      "ms": 85,
+      "ce": 3.26,
+      "pb": 26,
+      "clase": "concentrado"
+    },
+    {
+      "id": "1738016537188",
+      "nombre": "Avena pastoreo",
+      "ms": 22,
+      "ce": 2.24,
+      "pb": 17,
+      "clase": "forraje"
+    },
+    {
+      "id": "1739144221252",
+      "nombre": "Balanceado 14%",
+      "clase": "concentrado",
+      "ms": 88,
+      "ce": 2.82,
+      "pb": 14
+    },
+    {
+      "id": "1738103235513",
+      "nombre": "Balanceado 16%",
+      "ms": 88,
+      "ce": 2.86,
+      "pb": 16,
+      "clase": "concentrado"
+    },
+    {
+      "id": "1738016430004",
+      "nombre": "Maíz grano seco",
+      "ms": 85.5,
+      "ce": 3.05,
+      "pb": 6.7,
+      "clase": "concentrado"
+    },
+    {
+      "id": "1738016472924",
+      "nombre": "Maíz Silo",
+      "ms": 36,
+      "ce": 2.18,
+      "pb": 7.2,
+      "clase": "forraje"
+    },
+    {
+      "id": "1738016566289",
+      "nombre": "Moha heno",
+      "ms": 88,
+      "ce": 1.9,
+      "pb": 7,
+      "clase": "forraje"
+    },
+    {
+      "id": "1738096275085",
+      "nombre": "Rye Grass Pastoreo",
+      "ms": 22,
+      "ce": 2.28,
+      "pb": 17.5,
+      "clase": "forraje"
+    },
+    {
+      "id": "1738500749946",
+      "nombre": "Soja expeller",
+      "ms": 88,
+      "ce": 3.24,
+      "pb": 41.5,
+      "clase": "concentrado"
+    },
+    {
+      "id": "1738016501918",
+      "nombre": "Sorgo forrajero pastoreo",
+      "ms": 23,
+      "ce": 2.1,
+      "pb": 11.8,
+      "clase": "forraje"
+    }
+  ]
+]

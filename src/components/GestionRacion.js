@@ -4,6 +4,7 @@ import trash from '../images/trash.svg';
 import ResultadosRacion from "./ResultadosRacion";
 import MensajeError from "./MensajeError";
 import divisas from './Divisas'
+import ResultadosEconomicos from "./ResultadosEconomicos";
 
 function GestionRacion(props) {
     const [nombreCaso, setNombreCaso] = useState("");
@@ -18,13 +19,14 @@ function GestionRacion(props) {
     const [datosSesion, setDatosSesion] = useState([]);
     const [carga, setCarga] = useState(false);
     const [mostrarResultados, setMostrarResultados] = useState(false);
-    const [mostrarEconomicos, setMostrarEconomicos] = useState(false);
+    const [mostrarIndEcon, setMostrarIndEcon] = useState(false);
     const [currency, setCurrency] = useState("Peso argentino");
     const [codigoMoneda, setCodigoMoneda] = useState("ARS");
     const datosMoneda = divisas.map(item => item.currency);
     const [precioLitro, setPrecioLitro] = useState(0);
     const [precioKgSU, setPrecioKgSU] = useState(0);
     const [decimales, setDecimales] = useState(2);
+    const [mostrarResEcon, setMostrarResEcon] = useState(false);
 
     let decimales2 = 0;
     if (decimales > 1) { decimales2 = decimales - 1 } else { decimales2 = 0 };
@@ -183,8 +185,12 @@ function GestionRacion(props) {
     };
 
     const handleClick2 = () => {
-        setMostrarEconomicos(true);
-    }
+        setMostrarIndEcon(true);
+    };
+
+    const handleClick3 = () => {
+        setMostrarResEcon(true);
+    };
 
     const handleSelect1Change = (event) => {
         const selectedCurrency = event.target.value;
@@ -217,14 +223,14 @@ function GestionRacion(props) {
 
     useEffect(() => {
         const actualizarPrecios = alimentosRacion.map(alimento => ({
-          ...alimento,
-          costokgtc: parseFloat(alimento.costokgtc).toFixed(decimales),
-          costokgms: parseFloat(alimento.costokgms).toFixed(decimales),
-          costokgcons: parseFloat(alimento.costokgcons).toFixed(decimales),
+            ...alimento,
+            costokgtc: parseFloat(alimento.costokgtc).toFixed(decimales),
+            costokgms: parseFloat(alimento.costokgms).toFixed(decimales),
+            costokgcons: parseFloat(alimento.costokgcons).toFixed(decimales),
         }));
         setAlimentosRacion(actualizarPrecios);
         setPrecioLitro(parseFloat(precioLitro).toFixed(decimales))
-      }, [decimales]);
+    }, [decimales]);
 
     return (
         <div>
@@ -373,14 +379,14 @@ function GestionRacion(props) {
                     </div>)}
                 </div>
             </div>
-            {!mostrarResultados && (<button onClick={handleClick1}>VER RESULTADOS</button>)}
-            {mostrarResultados && (<div>
+            {!mostrarResultados && validacionVaca && validacionAlimentos && (<button onClick={handleClick1}>VER RESULTADOS</button>)}
+            {mostrarResultados && validacionVaca && validacionAlimentos && (<div>
                 <ResultadosRacion pesoVivo={pesoVivo} produccionIndividual={produccionIndividual}
                     lecheGB={lecheGB} lechePB={lechePB} alimentosRacion={alimentosRacion} racionMSCons={racionMSCons}
                 />
-                {!mostrarEconomicos && (<button onClick={handleClick2}>CÁLCULOS ECONÓMICOS</button>)}
+                {!mostrarIndEcon && (<button onClick={handleClick2}>CÁLCULOS ECONÓMICOS</button>)}
             </div>)}
-            {mostrarEconomicos && (<div className="seccion">
+            {mostrarIndEcon && (<div className="seccion">
                 <h2>INDICADORES ECONÓMICOS DE LA RACIÓN</h2>
                 <hr />
                 <h3>FORMATO DE MONEDA</h3>
@@ -497,6 +503,11 @@ function GestionRacion(props) {
                         <MensajeError />
                     </div>)}
                 </div>
+            </div>)}
+            {(validacionPrecioLeche && validacionPreciosAlimentos && !mostrarResEcon) && (
+                <button onClick={handleClick3}>VER RESULTADOS ECONÓMICOS</button>)}
+            {(validacionPrecioLeche && validacionPreciosAlimentos && mostrarResEcon) && (<div>
+                <ResultadosEconomicos />
             </div>)}
             <hr></hr>
         </div>

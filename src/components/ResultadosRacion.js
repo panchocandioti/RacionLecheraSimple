@@ -40,7 +40,7 @@ function ResultadosRacion(props) {
     return (
         <div>
             <div className="seccion">
-                <h2>RESULTADOS DE LA RACIÓN</h2>
+                <h2>RESULTADOS FÍSICOS DE LA RACIÓN</h2>
                 <hr />
                 <div>
                     <h3>REQUERIMIENTOS</h3>

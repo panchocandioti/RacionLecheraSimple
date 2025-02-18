@@ -379,7 +379,7 @@ function GestionRacion(props) {
                     </div>)}
                 </div>
             </div>
-            {!mostrarResultados && validacionVaca && validacionAlimentos && (<button onClick={handleClick1}>VER RESULTADOS</button>)}
+            {!mostrarResultados && validacionVaca && validacionAlimentos && (<button onClick={handleClick1}>VER RESULTADOS FÍSICOS</button>)}
             {mostrarResultados && validacionVaca && validacionAlimentos && (<div>
                 <ResultadosRacion pesoVivo={pesoVivo} produccionIndividual={produccionIndividual}
                     lecheGB={lecheGB} lechePB={lechePB} alimentosRacion={alimentosRacion} racionMSCons={racionMSCons}
@@ -387,7 +387,7 @@ function GestionRacion(props) {
                 {!mostrarIndEcon && (<button onClick={handleClick2}>CÁLCULOS ECONÓMICOS</button>)}
             </div>)}
             {mostrarIndEcon && (<div className="seccion">
-                <h2>INDICADORES ECONÓMICOS DE LA RACIÓN</h2>
+                <h2>DATOS ECONÓMICOS DE LA RACIÓN</h2>
                 <hr />
                 <h3>FORMATO DE MONEDA</h3>
                 <div className='seccionFormulario'>
@@ -504,10 +504,12 @@ function GestionRacion(props) {
                     </div>)}
                 </div>
             </div>)}
-            {(validacionPrecioLeche && validacionPreciosAlimentos && !mostrarResEcon) && (
+            {(mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && !mostrarResEcon) && (
                 <button onClick={handleClick3}>VER RESULTADOS ECONÓMICOS</button>)}
-            {(validacionPrecioLeche && validacionPreciosAlimentos && mostrarResEcon) && (<div>
-                <ResultadosEconomicos />
+            {(mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && mostrarResEcon) && (<div>
+                <ResultadosEconomicos alimentosRacion={alimentosRacion} datosVaca={datosVaca} precioLitro={precioLitro}
+                    precioKgSU={precioKgSU} codigoMoneda={codigoMoneda} decimales={decimales} racionMSCons={racionMSCons}
+                />
             </div>)}
             <hr></hr>
         </div>

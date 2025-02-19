@@ -383,6 +383,7 @@ function GestionRacion(props) {
             {mostrarResultados && validacionVaca && validacionAlimentos && (<div>
                 <ResultadosRacion pesoVivo={pesoVivo} produccionIndividual={produccionIndividual}
                     lecheGB={lecheGB} lechePB={lechePB} alimentosRacion={alimentosRacion} racionMSCons={racionMSCons}
+                    lecheSolidos={lecheSolidos} racionMSOfrecida={racionMSOfrecida}
                 />
                 {!mostrarIndEcon && (<button onClick={handleClick2}>CÁLCULOS ECONÓMICOS</button>)}
             </div>)}
@@ -507,8 +508,9 @@ function GestionRacion(props) {
             {(mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && !mostrarResEcon) && (
                 <button onClick={handleClick3}>VER RESULTADOS ECONÓMICOS</button>)}
             {(mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && mostrarResEcon) && (<div>
-                <ResultadosEconomicos alimentosRacion={alimentosRacion} datosVaca={datosVaca} precioLitro={precioLitro}
+                <ResultadosEconomicos alimentosRacion={alimentosRacion} precioLitro={precioLitro}
                     precioKgSU={precioKgSU} codigoMoneda={codigoMoneda} decimales={decimales} racionMSCons={racionMSCons}
+                    produccionIndividual={produccionIndividual} lecheSolidos={lecheSolidos}
                 />
             </div>)}
             <hr></hr>

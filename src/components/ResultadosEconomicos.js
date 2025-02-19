@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
+import GraficoMargenAlimentacion from './GraficoMargenAlimentacion';
 
 function ResultadosEconomicos(props) {
 
     const alimentosRacion = props.alimentosRacion;
-    const datosVaca = props.datosVaca;
+    const produccionIndividual = props.produccionIndividual;
+    const lecheSolidos = props.lecheSolidos;
     const precioLitro = props.precioLitro;
     const precioKgSU = props.precioKgSU;
     const codigoMoneda = props.codigoMoneda;
@@ -14,6 +16,7 @@ function ResultadosEconomicos(props) {
     const racionMSCons = props.racionMSCons;
     const [alimentosAporteEM, setAlimentosAporteEM] = useState([]);
     const [alimentosAportePB, setAlimentosAportePB] = useState([]);
+    const ingresoLeche = (parseFloat(produccionIndividual) * parseFloat(precioLitro)).toFixed(decimales);
 
     useEffect(() => {
         const alimentoEM = alimentosRacion.map((alimento) => (parseFloat(alimento.ce) * parseFloat(alimento.kgcons)));
@@ -96,8 +99,39 @@ function ResultadosEconomicos(props) {
                     </tfoot>
                 </table>
             </div>
+            <hr />
+            <h3>INGRESOS LECHE</h3>
+            <h5>Valor producido diario por vaca</h5>
+            <div className='table-responsive'>
+                <table className="table table-sm table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Unidades producidas</th>
+                            <th>Precio unitario</th>
+                            <th>Ingresos leche</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{produccionIndividual} litros diarios/vaca</td>
+                            <td>{precioLitro} {codigoMoneda}/litro</td>
+                            <td>{ingresoLeche} {codigoMoneda} diarios/vaca</td>
+                        </tr>
 
-
+                        <tr>
+                            <td>{(parseFloat(produccionIndividual) * parseFloat(lecheSolidos) / 100).toFixed(4)} kgSU diarios/vaca</td>
+                            <td>{precioKgSU} {codigoMoneda}/kgSU</td>
+                            <td>{ingresoLeche} {codigoMoneda} diarios/vaca</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr />
+            <h3>MARGEN SOBRE ALIMENTACIÓN</h3>
+            <h5>Expresado en dinero, litros y porcentaje del ingreso</h5>
+            <GraficoMargenAlimentacion codigoMoneda={codigoMoneda} ingresoLeche={ingresoLeche} racionCostoFormato={racionCostoFormato}
+                precioLitro={precioLitro} decimales={decimales}
+            />
         </div>
     )
 }

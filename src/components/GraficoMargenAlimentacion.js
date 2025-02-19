@@ -34,7 +34,7 @@ function GraficoMargenAlimentacion(props) {
     };
 
     const handleClickPorcentaje = () => {
-        setUnidad("%");
+        setUnidad("% sobre ingreso leche");
         setMargenSobreAlimentacion(racionMargenPorciento);
         setCostoAlimentacion(racionCostoPorciento);
     };

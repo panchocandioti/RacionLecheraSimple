@@ -15,6 +15,9 @@ function GraficoConsumo(props) {
     const consumoMaximo = Math.max(consumo1, consumo2);
     const consumoMinimo = Math.min(consumo1, consumo2);
     const [icon, setIcon] = useState(null);
+    let sistema;
+        if (props.sistema === "pastoreo") {sistema = "en pastoreo"};
+        if (props.sistema === "confinamiento") {sistema = "en confinamiento"};
 
     useEffect(() => {
         if (consumo <= consumoMinimo) setIcon(1);
@@ -56,7 +59,7 @@ function GraficoConsumo(props) {
         <div className='resultados'>
             <div className='containerIcons'>
                 <div>
-                    <h5>Consumo de Materia Seca</h5>
+                    <h5>Consumo de Materia Seca {sistema}</h5>
                 </div>
                 <div>
                     {icon === 1 && (<img className="icon" src={check_icon}></img>)}
@@ -69,6 +72,7 @@ function GraficoConsumo(props) {
                     <Bar data={data} options={options}></Bar>
                 </div>
             </div>
+            <p>(1) Factores del animal - (2) Factores del animal y de la ración</p>
         </div>
     )
 }

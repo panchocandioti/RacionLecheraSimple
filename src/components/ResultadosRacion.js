@@ -11,6 +11,7 @@ function ResultadosRacion(props) {
     const racionMSOfrecida = props.racionMSOfrecida;
     const lecheSolidos = props.lecheSolidos;
     const produccionIndividual = props.produccionIndividual;
+    const sistema = props.sistema;
     const produccionSolidos = (parseFloat(produccionIndividual) * parseFloat(lecheSolidos) / 100).toFixed(4);
     const [alimentosAporteEM, setAlimentosAporteEM] = useState([]);
     const [alimentosAportePB, setAlimentosAportePB] = useState([]);
@@ -27,8 +28,13 @@ function ResultadosRacion(props) {
     const racionPBCons = alimentosAportePB.reduce((acumulador, valor) => acumulador + parseFloat(valor), 0);
     const racionCE = racionEMCons / racionMSCons;
     const racionPB = racionPBCons / racionMSCons * 100;
-    const consumoEstimado1 = 0.026 * props.pesoVivo + 0.186 * produccionIndividual;
-    const consumoEstimado2 = (0.0107 * props.pesoVivo / (1 - racionCE / 3.6)) ** ((-racionCE + 1.8) / 40 + 0.99);
+    const consumoEstimado1 = 0.0265 * props.pesoVivo + 0.186 * produccionIndividual;
+    const fdnPorciento = -35.651 * (racionCE ** 2) + 137.91 * racionCE - 90.085;
+    const factor = -489.82 * (racionCE ** 2) + 2321 * racionCE - 2666.6;
+    let consumoEstimado2;
+    if (sistema === "confinamiento") { consumoEstimado2 = (0.0107 * props.pesoVivo / (1 - racionCE / 3.6)) ** ((-racionCE + 1.8) / 40 + 0.99) };
+    if (sistema === "pastoreo") { consumoEstimado2 = 0.0165 * props.pesoVivo / fdnPorciento * factor };
+
     const reqEMMant = 0.2032 * ((props.pesoVivo / 1.08) ** 0.67) / (0.503 + 0.35 * racionCE / 4.4);
     const reqEMProd = (0.09 * props.lecheGB + 0.05 * props.lechePB + 0.23) / (0.35 * racionCE / 4.4 + 0.42);
     const reqEMTotal = reqEMMant + produccionIndividual * reqEMProd;
@@ -137,8 +143,8 @@ function ResultadosRacion(props) {
                                     <td>{(parseFloat(produccionIndividual) / parseFloat(racionMSCons)).toFixed(2)} litros/kgMS</td>
                                 </tr>
                                 <tr>
-                                    <td>{(parseFloat(produccionSolidos)/parseFloat(racionMSOfrecida)*1000).toFixed(0)} kgSU/tonMS</td>
-                                    <td>{(parseFloat(produccionSolidos)/parseFloat(racionMSCons)*1000).toFixed(0)} kgSU/tonMS</td>
+                                    <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSOfrecida) * 1000).toFixed(0)} kgSU/tonMS</td>
+                                    <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSCons) * 1000).toFixed(0)} kgSU/tonMS</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -147,7 +153,8 @@ function ResultadosRacion(props) {
                 <hr />
                 <h3>GRÁFICOS BALANCE</h3>
                 <div>
-                    <GraficoConsumo racionMSCons={racionMSCons} consumoEstimado1={consumoEstimado1} consumoEstimado2={consumoEstimado2} />
+                    <GraficoConsumo racionMSCons={racionMSCons} consumoEstimado1={consumoEstimado1} consumoEstimado2={consumoEstimado2}
+                        sistema={sistema} />
                     <GraficoForrajeConcentrado forrajePorciento={forrajePorciento} concentradoPorciento={concentradoPorciento} />
                     <GraficoEnergia racionEMCons={racionEMCons} reqEMTotal={reqEMTotal} />
                     <GraficoProteina racionPBCons={racionPBCons} reqPBTotal={reqPBTotal} />

@@ -27,6 +27,7 @@ function GestionRacion(props) {
     const [precioKgSU, setPrecioKgSU] = useState(0);
     const [decimales, setDecimales] = useState(2);
     const [mostrarResEcon, setMostrarResEcon] = useState(false);
+    const [sistema, setSistema] = useState('');
 
     let decimales2 = 0;
     if (decimales > 1) { decimales2 = decimales - 1 } else { decimales2 = 0 };
@@ -75,12 +76,13 @@ function GestionRacion(props) {
         const nuevaVaca = {
             id: String(Date.now()),
             pv: pesoVivo,
+            sist: sistema,
             pi: produccionIndividual,
             gb: lecheGB,
             pb: lechePB,
         };
         setDatosVaca([nuevaVaca]);
-    }, [pesoVivo, produccionIndividual, lecheGB, lechePB]);
+    }, [pesoVivo, sistema, produccionIndividual, lecheGB, lechePB]);
 
     useEffect(() => {
         const nuevosDatos = ["datosRacion", nombreCaso, datosVaca, currency, codigoMoneda, precioLitro, alimentosRacion];
@@ -89,6 +91,7 @@ function GestionRacion(props) {
 
     useEffect(() => {
         setPesoVivo(datosVaca.pv);
+        setSistema(datosVaca.sist);
         setProduccionIndividual(datosVaca.pi);
         setLecheGB(datosVaca.gb);
         setLechePB(datosVaca.pb);
@@ -174,7 +177,7 @@ function GestionRacion(props) {
     let validacionVaca = false;
     let validacionAlimentos = false;
 
-    if ((pesoVivo >= 330 && pesoVivo <= 830) && (produccionIndividual >= 0 && produccionIndividual <= 70) && (lecheGB >= 0 && lecheGB <= 6)
+    if ((pesoVivo >= 330 && pesoVivo <= 830) && (sistema === "pastoreo" || sistema === "confinamiento") && (produccionIndividual >= 0 && produccionIndividual <= 70) && (lecheGB >= 0 && lecheGB <= 6)
         && (lechePB >= 0 && lechePB <= 5)) validacionVaca = true;
 
     if (racionMSCons > 0) validacionAlimentos = true;
@@ -232,6 +235,10 @@ function GestionRacion(props) {
         setPrecioLitro(parseFloat(precioLitro).toFixed(decimales))
     }, [decimales]);
 
+    const manejarCambio = (event) => {
+        setSistema(event.target.value);
+    };
+
     return (
         <div>
             <div className="seccion">
@@ -262,6 +269,29 @@ function GestionRacion(props) {
                             min="330"
                             max="830"
                         />
+                        <br />
+                        <div>
+                                <label>
+                                    <input
+                                        className="radio"
+                                        type="radio"
+                                        value="pastoreo"
+                                        checked={sistema === 'pastoreo'}
+                                        onChange={manejarCambio}
+                                    />
+                                    En pastoreo
+                                </label>
+                                <label>
+                                    <input
+                                        className="radio"
+                                        type="radio"
+                                        value="confinamiento"
+                                        checked={sistema === 'confinamiento'}
+                                        onChange={manejarCambio}
+                                    />
+                                    En confinamiento
+                                </label>
+                            </div>
                         <br />
                         <label>Producción de leche (litros/vaca día):</label>
                         <input
@@ -383,7 +413,7 @@ function GestionRacion(props) {
             {mostrarResultados && validacionVaca && validacionAlimentos && (<div>
                 <ResultadosRacion pesoVivo={pesoVivo} produccionIndividual={produccionIndividual}
                     lecheGB={lecheGB} lechePB={lechePB} alimentosRacion={alimentosRacion} racionMSCons={racionMSCons}
-                    lecheSolidos={lecheSolidos} racionMSOfrecida={racionMSOfrecida}
+                    lecheSolidos={lecheSolidos} racionMSOfrecida={racionMSOfrecida} sistema={sistema}
                 />
                 {!mostrarIndEcon && (<button onClick={handleClick2}>CÁLCULOS ECONÓMICOS</button>)}
             </div>)}

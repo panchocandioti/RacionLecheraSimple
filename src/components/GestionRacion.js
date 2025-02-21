@@ -123,7 +123,7 @@ function GestionRacion(props) {
     const actualizarKgTC = (id, valor) => {
         setAlimentosRacion((prev) =>
             prev.map((alimento) =>
-                alimento.id === id ? { ...alimento, kgtc: parseFloat(valor) || 0, kgms: (parseFloat(valor) * alimento.ms / 100).toFixed(1), kgcons: (parseFloat(valor) * alimento.ms * alimento.apr / 10000).toFixed(1) } : alimento
+                alimento.id === id ? { ...alimento, kgtc: parseFloat(valor) || "", kgms: (parseFloat(valor) * alimento.ms / 100).toFixed(1), kgcons: (parseFloat(valor) * alimento.ms * alimento.apr / 10000).toFixed(1) } : alimento
             )
         );
     };
@@ -131,7 +131,7 @@ function GestionRacion(props) {
     const actualizarKgMS = (id, valor) => {
         setAlimentosRacion((prev) =>
             prev.map((alimento) =>
-                alimento.id === id ? { ...alimento, kgms: parseFloat(valor) || 0, kgtc: ((parseFloat(valor) / alimento.ms) * 100).toFixed(1), kgcons: (parseFloat(valor) * alimento.apr / 100).toFixed(1) } : alimento
+                alimento.id === id ? { ...alimento, kgms: parseFloat(valor) || "", kgtc: ((parseFloat(valor) / alimento.ms) * 100).toFixed(1), kgcons: (parseFloat(valor) * alimento.apr / 100).toFixed(1) } : alimento
             )
         );
     };
@@ -139,7 +139,7 @@ function GestionRacion(props) {
     const actualizarApr = (id, valor) => {
         setAlimentosRacion((prev) =>
             prev.map((alimento) =>
-                alimento.id === id ? { ...alimento, apr: parseFloat(valor) || 0, kgcons: ((parseFloat(valor) * alimento.kgms) / 100).toFixed(1) } : alimento
+                alimento.id === id ? { ...alimento, apr: parseFloat(valor) || "", kgcons: ((parseFloat(valor) * alimento.kgms) / 100).toFixed(1) } : alimento
             )
         );
     };
@@ -147,7 +147,7 @@ function GestionRacion(props) {
     const actualizarCostoKgTC = (id, valor) => {
         setAlimentosRacion((prev) =>
             prev.map((alimento) =>
-                alimento.id === id ? { ...alimento, costokgtc: parseFloat(valor) || 0, costokgms: (parseFloat(valor) / alimento.ms * 100).toFixed(decimales), costokgcons: ((parseFloat(valor) / alimento.ms) / alimento.apr * 10000).toFixed(decimales) } : alimento
+                alimento.id === id ? { ...alimento, costokgtc: parseFloat(valor) || "", costokgms: (parseFloat(valor) / alimento.ms * 100).toFixed(decimales), costokgcons: ((parseFloat(valor) / alimento.ms) / alimento.apr * 10000).toFixed(decimales) } : alimento
             )
         );
     };
@@ -155,7 +155,7 @@ function GestionRacion(props) {
     const actualizarCostoKgMS = (id, valor) => {
         setAlimentosRacion((prev) =>
             prev.map((alimento) =>
-                alimento.id === id ? { ...alimento, costokgms: parseFloat(valor) || 0, costokgtc: ((parseFloat(valor) * alimento.ms) / 100).toFixed(decimales), costokgcons: (parseFloat(valor) / alimento.apr * 100).toFixed(decimales) } : alimento
+                alimento.id === id ? { ...alimento, costokgms: parseFloat(valor) || "", costokgtc: ((parseFloat(valor) * alimento.ms) / 100).toFixed(decimales), costokgcons: (parseFloat(valor) / alimento.apr * 100).toFixed(decimales) } : alimento
             )
         );
     };
@@ -362,7 +362,7 @@ function GestionRacion(props) {
                                                 id="input-tabla"
                                                 type="number"
                                                 value={alimento.kgtc}
-                                                onChange={(e) => actualizarKgTC(alimento.id, e.target.value)}
+                                                onChange={(e) => actualizarKgTC(alimento.id, parseFloat(e.target.value))}
                                             /> kgTC
                                         </td>
                                         <td>{alimento.ms}%</td>
@@ -371,7 +371,7 @@ function GestionRacion(props) {
                                                 id="input-tabla"
                                                 type="number"
                                                 value={alimento.kgms}
-                                                onChange={(e) => actualizarKgMS(alimento.id, e.target.value)}
+                                                onChange={(e) => actualizarKgMS(alimento.id, parseFloat(e.target.value))}
                                             /> kgMS
                                         </td>
                                         <td>
@@ -379,7 +379,7 @@ function GestionRacion(props) {
                                                 id="input-tabla"
                                                 type="number"
                                                 value={alimento.apr}
-                                                onChange={(e) => actualizarApr(alimento.id, e.target.value)}
+                                                onChange={(e) => actualizarApr(alimento.id, parseFloat(e.target.value))}
                                             /> %
                                         </td>
                                         <td>{(alimento.kgcons)} kgMS</td>

@@ -46,6 +46,8 @@ function ResultadosRacion(props) {
     }, 0);
     const forrajePorciento = (racionMSForraje / racionMSCons * 100).toFixed(0);
     const concentradoPorciento = (100 - parseFloat(forrajePorciento)).toFixed(0);
+    const metanoEmitidoKgDia = ((parseFloat(racionEMCons) / 0.82) / (parseFloat(racionCE / 3.6))) * (-10 * parseFloat(racionCE) / 3.6 + 12) / 1329;
+    const metanoEmitidoGramosLitro = (metanoEmitidoKgDia * 1000 / parseFloat(produccionIndividual)).toFixed(1);
 
     return (
         <div>
@@ -126,29 +128,8 @@ function ResultadosRacion(props) {
                             </tfoot>
                         </table>
                     </div>
-                    <hr />
-                    <h3>EFICIENCIA DE CONVERSIÓN</h3>
-                    <h5>Conversión de materia seca ofrecida y consumida</h5>
-                    <div className='table-responsive'>
-                        <table className="table table-sm table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Materia seca ofrecida</th>
-                                    <th>Materia seca consumida</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{(parseFloat(produccionIndividual) / parseFloat(racionMSOfrecida)).toFixed(2)} litros/kgMS</td>
-                                    <td>{(parseFloat(produccionIndividual) / parseFloat(racionMSCons)).toFixed(2)} litros/kgMS</td>
-                                </tr>
-                                <tr>
-                                    <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSOfrecida) * 1000).toFixed(0)} kgSU/tonMS</td>
-                                    <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSCons) * 1000).toFixed(0)} kgSU/tonMS</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
+
                 </div>
                 <hr />
                 <h3>GRÁFICOS BALANCE</h3>
@@ -158,6 +139,48 @@ function ResultadosRacion(props) {
                     <GraficoForrajeConcentrado forrajePorciento={forrajePorciento} concentradoPorciento={concentradoPorciento} />
                     <GraficoEnergia racionEMCons={racionEMCons} reqEMTotal={reqEMTotal} />
                     <GraficoProteina racionPBCons={racionPBCons} reqPBTotal={reqPBTotal} />
+                </div>
+                <hr />
+                <h3>EFICIENCIA DE CONVERSIÓN</h3>
+                <h5>Conversión de materia seca ofrecida y consumida</h5>
+                <div className='table-responsive'>
+                    <table className="table table-sm table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Materia seca ofrecida</th>
+                                <th>Materia seca consumida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{(parseFloat(produccionIndividual) / parseFloat(racionMSOfrecida)).toFixed(2)} litros/kgMS</td>
+                                <td>{(parseFloat(produccionIndividual) / parseFloat(racionMSCons)).toFixed(2)} litros/kgMS</td>
+                            </tr>
+                            <tr>
+                                <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSOfrecida) * 1000).toFixed(0)} kgSU/tonMS</td>
+                                <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSCons) * 1000).toFixed(0)} kgSU/tonMS</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr />
+                <h3>EMISIÓN DE METANO</h3>
+                <h5>Metano entérico emitido por día y por litro producido</h5>
+                <div className='table-responsive'>
+                    <table className="table table-sm table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>CH4/vaca día</th>
+                                <th>CH4/litro producido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{(parseFloat(metanoEmitidoKgDia) * 1000).toFixed(0)} gramos CH4/vaca día</td>
+                                <td>{metanoEmitidoGramosLitro} gramos CH4/litro producido</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

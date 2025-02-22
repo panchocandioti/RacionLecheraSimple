@@ -229,6 +229,7 @@ input::placeholder {
 .button, .comenzar {
   display: block;
   margin: 0 auto;
+  margin-bottom: 5px;
 }
 
 .comenzar {

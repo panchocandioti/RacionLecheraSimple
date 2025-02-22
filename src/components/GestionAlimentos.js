@@ -20,8 +20,13 @@ function GestionAlimentos() {
     const [mostrarAgregarAlimentos, setMostrarAgregarAlimentos] = useState(false);
     const [mostrarEditarAlimentos, setMostrarEditarAlimentos] = useState(false);
     const [clasificacion, setClasificacion] = useState('');
+    const [mostrarBaseAlimentos, setMostrarBaseAlimentos] = useState(false);
 
 
+    const manejarOnClick1 = () => {
+        setMostrarBaseAlimentos(!mostrarBaseAlimentos);
+    };
+    
     // Guardar datos en un archivo JSON
     const descargarJSON = (nombreArchivo = "baseAlimentos.json") => {
         const datosStr = JSON.stringify(baseAlimentos, null, 2);
@@ -163,7 +168,7 @@ function GestionAlimentos() {
 
     return (
         <div>
-            <div className="seccion">
+            {mostrarBaseAlimentos && (<div className="seccion">
                 <h2>BASE DE ALIMENTOS</h2>
                 <hr />
                 <h5>Guardar/Importar base de alimentos</h5>
@@ -368,7 +373,9 @@ function GestionAlimentos() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+                
+            </div>)}
+            <button className="button" onClick={manejarOnClick1}>{mostrarBaseAlimentos === true ? "Ocultar base alimentos" : "Mostrar base alimentos"}</button>
             <GestionRacion baseAlimentos={alimentosActivos} />
         </div>
     );

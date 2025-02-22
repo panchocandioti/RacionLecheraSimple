@@ -30,7 +30,13 @@ function ResultadosRacion(props) {
     const racionPB = racionPBCons / racionMSCons * 100;
     const consumoEstimado1 = 0.0265 * props.pesoVivo + 0.186 * produccionIndividual;
     const consumoEstimado2 = 0.0107 * props.pesoVivo / (1 - racionCE / 3.6);
-    const reqEMMant = 0.2032 * ((props.pesoVivo / 1.08) ** 0.67) / (0.503 + 0.35 * racionCE / 4.4);
+    let reqEMMant;
+    if (sistema === "confinamiento") {
+        reqEMMant = (0.2032 * ((props.pesoVivo / 1.08) ** 0.67) / (0.503 + 0.35 * racionCE / 4.4))*.925;
+    };
+    if (sistema === "pastoreo") {
+        reqEMMant = 0.2032 * ((props.pesoVivo / 1.08) ** 0.67) / (0.503 + 0.35 * racionCE / 4.4);
+    }
     const reqEMProd = (0.09 * props.lecheGB + 0.05 * props.lechePB + 0.23) / (0.35 * racionCE / 4.4 + 0.42);
     const reqEMTotal = reqEMMant + produccionIndividual * reqEMProd;
     const reqPBMant = (0.435 * props.pesoVivo + 143) / 1000;

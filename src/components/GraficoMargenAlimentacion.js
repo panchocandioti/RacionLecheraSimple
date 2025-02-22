@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Chart as ChartJS, ArcElement, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 
@@ -20,24 +20,32 @@ function GraficoMargenAlimentacion(props) {
     const [margenSobreAlimentacion, setMargenSobreAlimentacion] = useState(racionMargen);
     const [costoAlimentacion, setCostoAlimentacion] = useState(racionCosto);
 
-
     const handleClickMoneda = () => {
         setUnidad(codigoMoneda);
-        setMargenSobreAlimentacion(racionMargen);
-        setCostoAlimentacion(racionCosto);
     };
 
     const handleClickLitros = () => {
         setUnidad("Litros");
-        setMargenSobreAlimentacion(racionMargenLitros);
-        setCostoAlimentacion(racionCostoLitros);
     };
 
     const handleClickPorcentaje = () => {
         setUnidad("% sobre ingreso leche");
-        setMargenSobreAlimentacion(racionMargenPorciento);
-        setCostoAlimentacion(racionCostoPorciento);
     };
+
+    useEffect(() => {
+        if (unidad === codigoMoneda) {
+            setMargenSobreAlimentacion(racionMargen);
+            setCostoAlimentacion(racionCosto);
+        }
+        if (unidad === "Litros") {
+            setMargenSobreAlimentacion(racionMargenLitros);
+            setCostoAlimentacion(racionCostoLitros);
+        }
+        if (unidad === "% sobre ingreso leche") {
+            setMargenSobreAlimentacion(racionMargenPorciento);
+            setCostoAlimentacion(racionCostoPorciento);
+        }
+    }, [unidad, decimales, precioLitro, ingresoLeche, racionCosto]);
 
     const data = {
         labels: ["Margen sobre alimentación", "Costo de alimentación"],

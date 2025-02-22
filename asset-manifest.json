@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/RacionLecheraSimple/static/css/main.771b131f.css",
-    "main.js": "/RacionLecheraSimple/static/js/main.9d4e4c18.js",
+    "main.css": "/RacionLecheraSimple/static/css/main.b651b2db.css",
+    "main.js": "/RacionLecheraSimple/static/js/main.496b1e2f.js",
     "static/js/453.4ccb0bae.chunk.js": "/RacionLecheraSimple/static/js/453.4ccb0bae.chunk.js",
+    "static/media/vacas_compost.jpg": "/RacionLecheraSimple/static/media/vacas_compost.aa949afec06462cf8e29.jpg",
     "static/media/logo-UNL-FCA.png": "/RacionLecheraSimple/static/media/logo-UNL-FCA.8fbdb0aeddaa2e4015ca.png",
     "static/media/check_icon.png": "/RacionLecheraSimple/static/media/check_icon.fdaf3dd82f1383cc2f4a.png",
     "static/media/LogoSaltoAgro.png": "/RacionLecheraSimple/static/media/LogoSaltoAgro.c8696cc9c101ae8e82d5.png",
@@ -13,12 +14,12 @@
     "static/media/pencil-square.svg": "/RacionLecheraSimple/static/media/pencil-square.3bb70a9771e41b193ffddc1a3964b67b.svg",
     "static/media/trash.svg": "/RacionLecheraSimple/static/media/trash.e3bf10332853025c5b591e51f81f3ad5.svg",
     "static/media/arrow-up-square.svg": "/RacionLecheraSimple/static/media/arrow-up-square.46f8afb915cb1a65fb10d3c39e65c5e5.svg",
-    "main.771b131f.css.map": "/RacionLecheraSimple/static/css/main.771b131f.css.map",
-    "main.9d4e4c18.js.map": "/RacionLecheraSimple/static/js/main.9d4e4c18.js.map",
+    "main.b651b2db.css.map": "/RacionLecheraSimple/static/css/main.b651b2db.css.map",
+    "main.496b1e2f.js.map": "/RacionLecheraSimple/static/js/main.496b1e2f.js.map",
     "453.4ccb0bae.chunk.js.map": "/RacionLecheraSimple/static/js/453.4ccb0bae.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.771b131f.css",
-    "static/js/main.9d4e4c18.js"
+    "static/css/main.b651b2db.css",
+    "static/js/main.496b1e2f.js"
   ]
 }

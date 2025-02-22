@@ -14,6 +14,7 @@ function GestionRacion(props) {
     const [lechePB, setLechePB] = useState("");
     const [datosVaca, setDatosVaca] = useState([]);
     const baseAlimentos = props.baseAlimentos;
+    const baseGenericaActiva = props.baseGenericaActiva;
     const [alimentoSeleccionado, setAlimentoSeleccionado] = useState("");
     const [alimentosRacion, setAlimentosRacion] = useState([]);
     const [datosSesion, setDatosSesion] = useState([]);
@@ -271,27 +272,27 @@ function GestionRacion(props) {
                         />
                         <br />
                         <div>
-                                <label>
-                                    <input
-                                        className="radio"
-                                        type="radio"
-                                        value="pastoreo"
-                                        checked={sistema === 'pastoreo'}
-                                        onChange={manejarCambio}
-                                    />
-                                    En pastoreo
-                                </label>
-                                <label>
-                                    <input
-                                        className="radio"
-                                        type="radio"
-                                        value="confinamiento"
-                                        checked={sistema === 'confinamiento'}
-                                        onChange={manejarCambio}
-                                    />
-                                    En confinamiento
-                                </label>
-                            </div>
+                            <label>
+                                <input
+                                    className="radio"
+                                    type="radio"
+                                    value="pastoreo"
+                                    checked={sistema === 'pastoreo'}
+                                    onChange={manejarCambio}
+                                />
+                                En pastoreo
+                            </label>
+                            <label>
+                                <input
+                                    className="radio"
+                                    type="radio"
+                                    value="confinamiento"
+                                    checked={sistema === 'confinamiento'}
+                                    onChange={manejarCambio}
+                                />
+                                En confinamiento
+                            </label>
+                        </div>
                         <br />
                         <label>Producción de leche (litros/vaca día):</label>
                         <input
@@ -326,6 +327,8 @@ function GestionRacion(props) {
                 <div>
                     <div>
                         <h3>ALIMENTOS OFRECIDOS</h3>
+                        {baseGenericaActiva && (
+                            <h6 style={{ color: "red" }}>Trabajando con base genérica de alimentos</h6>)}
                         <h5>Ingredientes de la ración</h5>
                         <select
                             value={alimentoSeleccionado ? alimentoSeleccionado.id : ""}
@@ -417,7 +420,7 @@ function GestionRacion(props) {
                 />
                 {!mostrarIndEcon && (<button onClick={handleClick2}>CÁLCULOS ECONÓMICOS</button>)}
             </div>)}
-            {mostrarIndEcon && (<div className="seccion">
+            {mostrarResultados && validacionVaca && validacionAlimentos && mostrarIndEcon && (<div className="seccion">
                 <h2>DATOS ECONÓMICOS DE LA RACIÓN</h2>
                 <hr />
                 <h3>FORMATO DE MONEDA</h3>
@@ -537,7 +540,7 @@ function GestionRacion(props) {
             </div>)}
             {(mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && !mostrarResEcon) && (
                 <button onClick={handleClick3}>VER RESULTADOS ECONÓMICOS</button>)}
-            {(mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && mostrarResEcon) && (<div>
+            {(mostrarResultados && validacionVaca && validacionAlimentos && mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && mostrarResEcon) && (<div>
                 <ResultadosEconomicos alimentosRacion={alimentosRacion} precioLitro={precioLitro}
                     precioKgSU={precioKgSU} codigoMoneda={codigoMoneda} decimales={decimales} racionMSCons={racionMSCons}
                     produccionIndividual={produccionIndividual} lecheSolidos={lecheSolidos}

@@ -114,8 +114,8 @@ function ResultadosEconomicos(props) {
                     <tbody>
                         <tr>
                             <td>{produccionIndividual} litros diarios/vaca</td>
-                            <td>{precioLitro} {codigoMoneda}/litro</td>
-                            <td>{ingresoLeche} {codigoMoneda} diarios/vaca</td>
+                            <td>{parseFloat(precioLitro).toFixed(decimales)} {codigoMoneda}/litro</td>
+                            <td>{parseFloat(ingresoLeche).toFixed(decimales)} {codigoMoneda} diarios/vaca</td>
                         </tr>
 
                         <tr>

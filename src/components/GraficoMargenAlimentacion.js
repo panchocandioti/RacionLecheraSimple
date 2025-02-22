@@ -8,6 +8,7 @@ function GraficoMargenAlimentacion(props) {
 
     const codigoMoneda = props.codigoMoneda;
     const decimales = props.decimales;
+    const [decimales2, setDecimales2] = useState(decimales);
     const precioLitro = props.precioLitro;
     const ingresoLeche = props.ingresoLeche;
     const racionCosto = props.racionCostoFormato;
@@ -22,14 +23,17 @@ function GraficoMargenAlimentacion(props) {
 
     const handleClickMoneda = () => {
         setUnidad(codigoMoneda);
+        setDecimales2(decimales);
     };
 
     const handleClickLitros = () => {
         setUnidad("Litros");
+        setDecimales2(1);
     };
 
     const handleClickPorcentaje = () => {
         setUnidad("% sobre ingreso leche");
+        setDecimales2(1);
     };
 
     useEffect(() => {
@@ -78,16 +82,36 @@ function GraficoMargenAlimentacion(props) {
     }
 
     return (
-        <div className='resultados'>
-            <div className='grafico'>
-                <div style={{ position: "relative", minHeight: "340px", width: "75vw" }}>
-                    <Pie data={data} options={options}></Pie>
-                </div>
+        <div>
+            <div className='table-responsive'>
+                <table className="table table-sm table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Ingresos leche</th>
+                            <th>Costo de alimentación</th>
+                            <th>Margen sobre alimentación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{(parseFloat(costoAlimentacion) + parseFloat(margenSobreAlimentacion)).toFixed(decimales2)} {unidad}</td>
+                            <td>{costoAlimentacion} {unidad}</td>
+                            <td>{margenSobreAlimentacion} {unidad}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div>
-                <button onClick={handleClickMoneda}>VER EN {codigoMoneda}</button>
-                <button onClick={handleClickLitros}>VER EN LITROS</button>
-                <button onClick={handleClickPorcentaje}>VER EN PORCENTAJE</button>
+            <div className='resultados'>
+                <div className='grafico'>
+                    <div style={{ position: "relative", minHeight: "340px", width: "75vw" }}>
+                        <Pie data={data} options={options}></Pie>
+                    </div>
+                </div>
+                <div>
+                    <button onClick={handleClickMoneda}>VER EN {codigoMoneda}</button>
+                    <button onClick={handleClickLitros}>VER EN LITROS</button>
+                    <button onClick={handleClickPorcentaje}>VER EN PORCENTAJE</button>
+                </div>
             </div>
         </div>
     )

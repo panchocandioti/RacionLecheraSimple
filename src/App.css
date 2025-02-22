@@ -3,6 +3,7 @@
   background-color: rgb(109, 198, 227);
   min-height: 100vh;
   margin: 0;
+  background-image: url('./images/vacas_compost.jpg');
   background-size: cover;
   background-position: center;
   min-width: 340px;
@@ -30,7 +31,7 @@ body {
   margin: 10px;
   padding: 5px;
   border: solid 2px black;
-  background-color: rgba(255,255,255,0.75);
+  background-color: rgba(255,255,255,0.69);
   text-align: center;
 }
 

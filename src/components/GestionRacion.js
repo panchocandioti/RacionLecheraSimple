@@ -146,17 +146,35 @@ function GestionRacion(props) {
     };
 
     const actualizarCostoKgTC = (id, valor) => {
+        const valorNormalizado = valor.replace(",", "."); // Reemplaza comas por puntos
+        const numero = valorNormalizado === "" ? "" : parseFloat(valorNormalizado); // Permitir que el input quede vacío sin poner NaN
         setAlimentosRacion((prev) =>
             prev.map((alimento) =>
-                alimento.id === id ? { ...alimento, costokgtc: parseFloat(valor) || "", costokgms: (parseFloat(valor) / alimento.ms * 100).toFixed(decimales), costokgcons: ((parseFloat(valor) / alimento.ms) / alimento.apr * 10000).toFixed(decimales) } : alimento
+                alimento.id === id
+                    ? {
+                        ...alimento,
+                        costokgtc: numero,
+                        costokgms: numero === "" ? "" : (numero / alimento.ms * 100).toFixed(decimales),
+                        costokgcons: numero === "" ? "" : ((numero / alimento.ms) / alimento.apr * 10000).toFixed(decimales),
+                    }
+                    : alimento
             )
         );
     };
 
     const actualizarCostoKgMS = (id, valor) => {
+        const valorNormalizado = valor.replace(",", "."); // Reemplaza comas por puntos
+        const numero = valorNormalizado === "" ? "" : parseFloat(valorNormalizado); // Permitir que el input quede vacío sin poner NaN
         setAlimentosRacion((prev) =>
             prev.map((alimento) =>
-                alimento.id === id ? { ...alimento, costokgms: parseFloat(valor) || "", costokgtc: ((parseFloat(valor) * alimento.ms) / 100).toFixed(decimales), costokgcons: (parseFloat(valor) / alimento.apr * 100).toFixed(decimales) } : alimento
+                alimento.id === id
+                    ? {
+                        ...alimento,
+                        costokgms: numero,
+                        costokgtc: numero === "" ? "" : (numero * alimento.ms / 100).toFixed(decimales),
+                        costokgcons: numero === "" ? "" : (numero / alimento.apr * 100).toFixed(decimales),
+                    }
+                    : alimento
             )
         );
     };
@@ -218,11 +236,11 @@ function GestionRacion(props) {
 
     let validacionPrecioLeche = false;
 
-    if (precioLitro > 0) validacionPrecioLeche = true;
+    if (precioLitro >= 0) validacionPrecioLeche = true;
 
     const validacionPreciosAlimentos = alimentosRacion.every(alimento => {
         const costokgcons = parseFloat(alimento.costokgcons);
-        return (!isNaN(costokgcons) && costokgcons > 0);
+        return (!isNaN(costokgcons) && costokgcons >= 0);
     });
 
     useEffect(() => {
@@ -265,7 +283,7 @@ function GestionRacion(props) {
                         <input
                             type="number"
                             value={pesoVivo}
-                            onChange={(e) => setPesoVivo(parseFloat(e.target.value))}
+                            onChange={(e) => setPesoVivo(parseFloat(e.target.value.replace(",", ".")))}
                             placeholder="Ingresar kgPV"
                             min="330"
                             max="830"
@@ -298,7 +316,7 @@ function GestionRacion(props) {
                         <input
                             type="number"
                             value={produccionIndividual}
-                            onChange={(e) => setProduccionIndividual(parseFloat(e.target.value))}
+                            onChange={(e) => setProduccionIndividual(parseFloat(e.target.value.replace(",", ".")))}
                             placeholder="Ingresar litros/vaca día"
                         />
                         <br />
@@ -306,7 +324,7 @@ function GestionRacion(props) {
                         <input
                             type="number"
                             value={lecheGB}
-                            onChange={(e) => setLecheGB(parseFloat(e.target.value))}
+                            onChange={(e) => setLecheGB(parseFloat(e.target.value.replace(",", ".")))}
                             placeholder="Ingresar GB (%)"
                         />
                         <br />
@@ -314,7 +332,7 @@ function GestionRacion(props) {
                         <input
                             type="number"
                             value={lechePB}
-                            onChange={(e) => setLechePB(parseFloat(e.target.value))}
+                            onChange={(e) => setLechePB(parseFloat(e.target.value.replace(",", ".")))}
                             placeholder="Ingresar PB (%)"
                         />
                     </form>
@@ -365,7 +383,7 @@ function GestionRacion(props) {
                                                 id="input-tabla"
                                                 type="number"
                                                 value={alimento.kgtc}
-                                                onChange={(e) => actualizarKgTC(alimento.id, parseFloat(e.target.value))}
+                                                onChange={(e) => actualizarKgTC(alimento.id, parseFloat(e.target.value.replace(",", ".")))}
                                             /> kgTC
                                         </td>
                                         <td>{alimento.ms}%</td>
@@ -374,7 +392,7 @@ function GestionRacion(props) {
                                                 id="input-tabla"
                                                 type="number"
                                                 value={alimento.kgms}
-                                                onChange={(e) => actualizarKgMS(alimento.id, parseFloat(e.target.value))}
+                                                onChange={(e) => actualizarKgMS(alimento.id, parseFloat(e.target.value.replace(",", ".")))}
                                             /> kgMS
                                         </td>
                                         <td>
@@ -382,7 +400,7 @@ function GestionRacion(props) {
                                                 id="input-tabla"
                                                 type="number"
                                                 value={alimento.apr}
-                                                onChange={(e) => actualizarApr(alimento.id, parseFloat(e.target.value))}
+                                                onChange={(e) => actualizarApr(alimento.id, parseFloat(e.target.value.replace(",", ".")))}
                                             /> %
                                         </td>
                                         <td>{(alimento.kgcons)} kgMS</td>
@@ -448,6 +466,9 @@ function GestionRacion(props) {
                         <input
                             type="number"
                             value={decimales}
+                            onInput={(e) => {
+                                e.target.value = e.target.value.replace(/\./g, ""); // Elimina el punto decimal
+                            }}
                             onChange={(e) => setDecimales(parseFloat(e.target.value))}
                             placeholder="Ingresar cantidad de decimales"
                             min="0"
@@ -514,6 +535,7 @@ function GestionRacion(props) {
                                             type="number"
                                             value={alimento.costokgtc}
                                             onChange={(e) => actualizarCostoKgTC(alimento.id, e.target.value)}
+                                            min="0"
                                         /> {codigoMoneda}/kgTC
                                     </td>
                                     <td>{alimento.ms}%</td>
@@ -523,6 +545,7 @@ function GestionRacion(props) {
                                             type="number"
                                             value={alimento.costokgms}
                                             onChange={(e) => actualizarCostoKgMS(alimento.id, e.target.value)}
+                                            min="0"
                                         /> {codigoMoneda}/kgMS
                                     </td>
                                     <td>

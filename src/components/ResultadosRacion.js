@@ -158,11 +158,12 @@ function ResultadosRacion(props) {
                                 <td>{(parseFloat(produccionIndividual) / parseFloat(racionMSCons)).toFixed(2)} litros/kgMS</td>
                             </tr>
                             <tr>
-                                <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSOfrecida) * 1000).toFixed(0)} kgSU/tonMS</td>
-                                <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSCons) * 1000).toFixed(0)} kgSU/tonMS</td>
+                                <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSOfrecida) * 1000).toFixed(0)} kgSU/tonMS (*)</td>
+                                <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSCons) * 1000).toFixed(0)} kgSU/tonMS (*)</td>
                             </tr>
                         </tbody>
                     </table>
+                    <p>(*) Sólidos útiles (kgSU): Proteína láctea (kgPB) + Grasa Butirosa (kgGB)</p>
                 </div>
                 <hr />
                 <h3>EMISIÓN DE METANO</h3>

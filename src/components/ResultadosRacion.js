@@ -32,7 +32,7 @@ function ResultadosRacion(props) {
     const consumoEstimado2 = 0.0107 * props.pesoVivo / (1 - racionCE / 3.6);
     let reqEMMant;
     if (sistema === "confinamiento") {
-        reqEMMant = (0.2032 * ((props.pesoVivo / 1.08) ** 0.67) / (0.503 + 0.35 * racionCE / 4.4))*.925;
+        reqEMMant = (0.18796 * ((props.pesoVivo / 1.08) ** 0.67) / (0.503 + 0.35 * racionCE / 4.4));
     };
     if (sistema === "pastoreo") {
         reqEMMant = 0.2032 * ((props.pesoVivo / 1.08) ** 0.67) / (0.503 + 0.35 * racionCE / 4.4);

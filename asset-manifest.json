@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/RacionLecheraSimple/static/css/main.fb8ba2b1.css",
-    "main.js": "/RacionLecheraSimple/static/js/main.fdac7f0c.js",
+    "main.css": "/RacionLecheraSimple/static/css/main.c3292381.css",
+    "main.js": "/RacionLecheraSimple/static/js/main.06f5d86f.js",
     "static/js/453.4ccb0bae.chunk.js": "/RacionLecheraSimple/static/js/453.4ccb0bae.chunk.js",
     "static/media/vacas_compost.jpg": "/RacionLecheraSimple/static/media/vacas_compost.aa949afec06462cf8e29.jpg",
     "static/media/logo-UNL-FCA.png": "/RacionLecheraSimple/static/media/logo-UNL-FCA.8fbdb0aeddaa2e4015ca.png",
@@ -14,12 +14,12 @@
     "static/media/pencil-square.svg": "/RacionLecheraSimple/static/media/pencil-square.3bb70a9771e41b193ffddc1a3964b67b.svg",
     "static/media/trash.svg": "/RacionLecheraSimple/static/media/trash.e3bf10332853025c5b591e51f81f3ad5.svg",
     "static/media/arrow-up-square.svg": "/RacionLecheraSimple/static/media/arrow-up-square.46f8afb915cb1a65fb10d3c39e65c5e5.svg",
-    "main.fb8ba2b1.css.map": "/RacionLecheraSimple/static/css/main.fb8ba2b1.css.map",
-    "main.fdac7f0c.js.map": "/RacionLecheraSimple/static/js/main.fdac7f0c.js.map",
+    "main.c3292381.css.map": "/RacionLecheraSimple/static/css/main.c3292381.css.map",
+    "main.06f5d86f.js.map": "/RacionLecheraSimple/static/js/main.06f5d86f.js.map",
     "453.4ccb0bae.chunk.js.map": "/RacionLecheraSimple/static/js/453.4ccb0bae.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fb8ba2b1.css",
-    "static/js/main.fdac7f0c.js"
+    "static/css/main.c3292381.css",
+    "static/js/main.06f5d86f.js"
   ]
 }

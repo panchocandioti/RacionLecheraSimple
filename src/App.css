@@ -200,6 +200,10 @@ select {
   font-size: smaller;
 }
 
+#select-alimentos {
+  margin-bottom: 5px;
+}
+
 input::placeholder {
   font-size:small;
 }

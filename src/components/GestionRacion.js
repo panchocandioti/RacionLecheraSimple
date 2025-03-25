@@ -108,18 +108,16 @@ function GestionRacion(props) {
         setAlimentoSeleccionado(alimento);
     };
 
-    const agregarAlimento = () => {
-        if (!alimentoSeleccionado) return;
-        if (alimentosRacion.some((a) => a.id === alimentoSeleccionado.id)) return;
-
-        const nuevoAlimento = {
-            ...alimentoSeleccionado,
-            kgtc: 0, kgms: 0, apr: 0, kgcons: 0, costokgtc: 0, costokgms: 0, costokgcons: 0
-        }; // Se agregan las nuevas propiedades inicializadas en 0
-
-        setAlimentosRacion((prev) => [...prev, nuevoAlimento]);
-        setAlimentoSeleccionado(null);
-    };
+    useEffect(() => {
+            if (!alimentoSeleccionado) return;
+            if (alimentosRacion.some((a) => a.id === alimentoSeleccionado.id)) return;
+            const nuevoAlimento = {
+                ...alimentoSeleccionado,
+                kgtc: 0, kgms: 0, apr: 0, kgcons: 0, costokgtc: 0, costokgms: 0, costokgcons: 0
+            }; // Se agregan las nuevas propiedades inicializadas en 0
+            setAlimentosRacion((prev) => [...prev, nuevoAlimento]);
+            setAlimentoSeleccionado(null);
+    },[alimentoSeleccionado]);
 
     const actualizarKgTC = (id, valor) => {
         setAlimentosRacion((prev) =>
@@ -351,6 +349,7 @@ function GestionRacion(props) {
                         <select
                             value={alimentoSeleccionado ? alimentoSeleccionado.id : ""}
                             onChange={handleSelectChange}
+                            id="select-alimentos"
                         >
                             <option value="" disabled>Seleccionar</option>
                             {baseAlimentos.map((alimento) => (
@@ -359,8 +358,9 @@ function GestionRacion(props) {
                                 </option>
                             ))}
                         </select>
-                        <button onClick={agregarAlimento}>Agregar alimento a ración</button>
+                        
                     </div>
+                    
                     <div className='table-responsive'>
                         <table className="table table-sm table-hover table-striped">
                             <thead>

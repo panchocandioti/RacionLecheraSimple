@@ -17,7 +17,7 @@ function GraficoEnergia(props) {
         datasets: [{
             label: "MCal EM",
             data: [energiaRacion, energiaRequerida],
-            backgroundColor: ["#FFB07C", "#D87C45"],
+            backgroundColor: ["#FFC04D", "#FF4500"],
             borderColor: "gray",
             borderWidth: 1,
         }]

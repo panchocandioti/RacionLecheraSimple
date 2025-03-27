@@ -30,7 +30,7 @@ function GraficoConsumo(props) {
         datasets: [{
             label: "kg MS",
             data: [consumo, consumo1, consumo2],
-            backgroundColor: ["lightgreen", "green", "darkgreen"],
+            backgroundColor: ["lightgreen", "darkgreen", "darkgreen"],
             borderColor: "gray",
             borderWidth: 1,
         }]

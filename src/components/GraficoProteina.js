@@ -17,7 +17,7 @@ function GraficoProteina(props) {
         datasets: [{
             label: "kg PB",
             data: [proteinaRacion, proteinaRequerida],
-            backgroundColor: ["#D6655A", "#B74134"],
+            backgroundColor: ["#FF9999", "#B22222"],
             borderColor: "gray",
             borderWidth: 1,
         }]

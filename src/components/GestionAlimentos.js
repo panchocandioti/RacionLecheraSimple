@@ -375,8 +375,8 @@ function GestionAlimentos() {
                 </div>
                 
             </div>)}
-            <button className="button" onClick={manejarOnClick1}>{mostrarBaseAlimentos === true ? "Ocultar base alimentos" : "Mostrar base alimentos"}</button>
-            <GestionRacion baseAlimentos={alimentosActivos} baseGenericaActiva={baseGenericaActiva}/>
+            <button className="button" onClick={manejarOnClick1}>{mostrarBaseAlimentos === true ? "Volver a ración" : "Mostrar base alimentos"}</button>
+            <GestionRacion baseAlimentos={alimentosActivos} baseGenericaActiva={baseGenericaActiva} mostrarBaseAlimentos={mostrarBaseAlimentos}/>
         </div>
     );
 

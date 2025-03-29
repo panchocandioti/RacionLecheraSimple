@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/RacionLecheraSimple/static/css/main.c3292381.css",
-    "main.js": "/RacionLecheraSimple/static/js/main.102ce338.js",
+    "main.js": "/RacionLecheraSimple/static/js/main.601c7765.js",
     "static/js/453.4ccb0bae.chunk.js": "/RacionLecheraSimple/static/js/453.4ccb0bae.chunk.js",
     "static/media/vacas_compost.jpg": "/RacionLecheraSimple/static/media/vacas_compost.aa949afec06462cf8e29.jpg",
     "static/media/logo-UNL-FCA.png": "/RacionLecheraSimple/static/media/logo-UNL-FCA.8fbdb0aeddaa2e4015ca.png",
@@ -11,15 +11,17 @@
     "static/media/Imagotipo NEGRO.png": "/RacionLecheraSimple/static/media/Imagotipo NEGRO.d131290964ada10d8574.png",
     "static/media/caution_icon.png": "/RacionLecheraSimple/static/media/caution_icon.64ddf8eb2c8463668b4a.png",
     "index.html": "/RacionLecheraSimple/index.html",
+    "static/media/floppy.svg": "/RacionLecheraSimple/static/media/floppy.1eab81c1d1045f8ad4ef5520294a1490.svg",
+    "static/media/folder2-open.svg": "/RacionLecheraSimple/static/media/folder2-open.23e4732b073923515a20b44f8db3f82a.svg",
     "static/media/pencil-square.svg": "/RacionLecheraSimple/static/media/pencil-square.3bb70a9771e41b193ffddc1a3964b67b.svg",
     "static/media/trash.svg": "/RacionLecheraSimple/static/media/trash.e3bf10332853025c5b591e51f81f3ad5.svg",
     "static/media/arrow-up-square.svg": "/RacionLecheraSimple/static/media/arrow-up-square.46f8afb915cb1a65fb10d3c39e65c5e5.svg",
     "main.c3292381.css.map": "/RacionLecheraSimple/static/css/main.c3292381.css.map",
-    "main.102ce338.js.map": "/RacionLecheraSimple/static/js/main.102ce338.js.map",
+    "main.601c7765.js.map": "/RacionLecheraSimple/static/js/main.601c7765.js.map",
     "453.4ccb0bae.chunk.js.map": "/RacionLecheraSimple/static/js/453.4ccb0bae.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c3292381.css",
-    "static/js/main.102ce338.js"
+    "static/js/main.601c7765.js"
   ]
 }

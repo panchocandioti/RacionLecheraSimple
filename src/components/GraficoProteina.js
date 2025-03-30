@@ -13,7 +13,7 @@ function GraficoProteina(props) {
     const balanceProteina = proteinaRacion - proteinaRequerida;
 
     const data = {
-        labels: ["Proteína Bruta consumida", "Proteína Bruta requerida"],
+        labels: ["PB consumida", "PB requerida"],
         datasets: [{
             label: "kg PB",
             data: [proteinaRacion, proteinaRequerida],

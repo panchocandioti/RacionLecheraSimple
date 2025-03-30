@@ -26,7 +26,7 @@ function GraficoConsumo(props) {
     }, [consumo, consumo1, consumo2]);
 
     const data = {
-        labels: ["Consumo declarado ración", "Estimación de consumo (1)", "Estimación de consumo (2)"],
+        labels: ["Consumo ración", "Consumo estimado (1)", "Consumo estimado (2)"],
         datasets: [{
             label: "kg MS",
             data: [consumo, consumo1, consumo2],

@@ -13,7 +13,7 @@ function GraficoEnergia(props) {
     const balanceEnergia = energiaRacion - energiaRequerida;
 
     const data = {
-        labels: ["Energía Metabólica consumida", "Energia Metabólica requerida"],
+        labels: ["EM consumida", "EM requerida"],
         datasets: [{
             label: "MCal EM",
             data: [energiaRacion, energiaRequerida],

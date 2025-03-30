@@ -7,6 +7,11 @@ import ResultadosRacion from "./ResultadosRacion";
 import MensajeError from "./MensajeError";
 import divisas from './Divisas'
 import ResultadosEconomicos from "./ResultadosEconomicos";
+import vaquita from "../images/vaquita.png";
+import pasto from "../images/pasto.png";
+import resfisicos from "../images/resfisicos.png";
+import datosecon from "../images/datoseconomicos.png";
+import resecon from "../images/reseconomicos.png";
 
 function GestionRacion(props) {
     const [nombreCaso, setNombreCaso] = useState("");
@@ -33,7 +38,6 @@ function GestionRacion(props) {
     const [mostrarResEcon, setMostrarResEcon] = useState(false);
     const [sistema, setSistema] = useState('');
     const [archivoActivo, setArchivoActivo] = useState("Ningún archivo seleccionado");
-    const [seccionesVisibles, setSeccionesVisibles] = useState([]);
 
     let decimales2 = 0;
     if (decimales > 1) { decimales2 = decimales - 1 } else { decimales2 = 0 };
@@ -270,35 +274,80 @@ function GestionRacion(props) {
         setSistema(event.target.value);
     };
 
+    //Navegación
+
+    const vacaRef = useRef(null);
+    const handleVacaScroll = () => {
+        if (vacaRef.current) {
+            const elementPosition = vacaRef.current.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: elementPosition - 160, behavior: "smooth" });
+        }
+    };
+
+    const alimentosRef = useRef(null);
+    const handleAlimentosScroll = () => {
+        if (alimentosRef.current) {
+            const elementPosition = alimentosRef.current.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: elementPosition - 160, behavior: "smooth" });
+        }
+    };
+
+    const resFisicosRef = useRef(null);
+    const handleResFisicosScroll = () => {
+        if (resFisicosRef.current) {
+            const elementPosition = resFisicosRef.current.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: elementPosition - 160, behavior: "smooth" });
+        }
+    };
+
+    const datosEconRef = useRef(null);
+    const handleDatosEconScroll = () => {
+        if (datosEconRef.current) {
+            const elementPosition = datosEconRef.current.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: elementPosition - 160, behavior: "smooth" });
+        }
+    };
+
+    const resEconRef = useRef(null);
+    const handleResEconScroll = () => {
+        if (resEconRef.current) {
+            const elementPosition = resEconRef.current.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: elementPosition - 160, behavior: "smooth" });
+        }
+    };
+
     return (
         <div>
             {!mostrarBaseAlimentos && (<div>
-                <div className="seccion">
-                    <h2>RACIÓN LECHERA</h2>
-                    <button
-                        onClick={() => descargarJSON("datosRacion.json")}
-                        style={{
-                            position: "fixed",
-                            bottom: "450px",
-                            right: "20px",
-                        }}
-                    >
+                <nav id="barra-navegacion">
+                    <button className="botonNavegacion" onClick={() => descargarJSON("datosRacion.json")}>
                         <img src={floppy} title="Guardar ración" alt="Guardar ración" />
                     </button>
+                    <button className="botonNavegacion" onClick={manejarClickBoton}>
+                        <img src={folder} title="Importar ración" alt="Importar ración" />
+                    </button>
+                    <button className="botonNavegacion" onClick={handleVacaScroll}>
+                        <img src={vaquita} title="Datos vaca lechera" alt="Datos vaca lechera" />
+                    </button>
+                    <button className="botonNavegacion" onClick={handleAlimentosScroll}>
+                        <img src={pasto} alt="Alimentos ofrecidos" title="Alimentos ofrecidos"></img>
+                    </button>
+                    {mostrarResultados && (<button className="botonNavegacion" onClick={handleResFisicosScroll}>
+                        <img src={resfisicos} alt="Resultados físicos" title="Resultados físicos"></img>
+                    </button>)}
+                    {mostrarIndEcon && (<button className="botonNavegacion" onClick={handleDatosEconScroll}>
+                        <img src={datosecon} alt="Datos económicos" title="Datos económicos"></img>
+                    </button>)}
+                    {mostrarResEcon && (<button className="botonNavegacion" onClick={handleResEconScroll}>
+                        <img src={resecon} alt="Resultados económicos" title="Resultados económicos"></img>
+                    </button>)}
+                </nav>
+                <div className="seccion">
+                    <h2>RACIÓN LECHERA</h2>
                     <input type="file"
                         ref={fileInputRef}
                         onChange={cargarJSON}
                         style={{ display: "none" }} />
-                    <button
-                        onClick={manejarClickBoton}
-                        style={{
-                            position: "fixed",
-                            bottom: "415px",
-                            right: "20px",
-                        }}
-                    >
-                        <img src={folder} title="Importar ración" alt="Importar ración" />
-                    </button>
                     <p>Archivo activo: {archivoActivo}</p>
                     <hr />
                     <div>
@@ -309,7 +358,7 @@ function GestionRacion(props) {
                         </form>
                     </div>
                     <hr />
-                    <div>
+                    <div ref={vacaRef}>
                         <form>
                             <h3>VACA LECHERA</h3>
                             <h5>Definición del animal</h5>
@@ -377,7 +426,7 @@ function GestionRacion(props) {
                     </div>
                     <hr />
                     <div>
-                        <div>
+                        <div ref={alimentosRef}>
                             <h3>ALIMENTOS OFRECIDOS</h3>
                             {baseGenericaActiva && (
                                 <h6 style={{ color: "red" }}>Trabajando con base genérica de alimentos</h6>)}
@@ -394,7 +443,6 @@ function GestionRacion(props) {
                                     </option>
                                 ))}
                             </select>
-
                         </div>
 
                         <div className='table-responsive'>
@@ -467,14 +515,14 @@ function GestionRacion(props) {
                     </div>
                 </div>
                 {!mostrarResultados && validacionVaca && validacionAlimentos && (<button onClick={handleClick1}>VER RESULTADOS FÍSICOS</button>)}
-                {mostrarResultados && validacionVaca && validacionAlimentos && (<div>
+                {mostrarResultados && validacionVaca && validacionAlimentos && (<div ref={resFisicosRef}>
                     <ResultadosRacion pesoVivo={pesoVivo} produccionIndividual={produccionIndividual}
                         lecheGB={lecheGB} lechePB={lechePB} alimentosRacion={alimentosRacion} racionMSCons={racionMSCons}
                         lecheSolidos={lecheSolidos} racionMSOfrecida={racionMSOfrecida} sistema={sistema}
                     />
                     {!mostrarIndEcon && (<button onClick={handleClick2}>CÁLCULOS ECONÓMICOS</button>)}
                 </div>)}
-                {mostrarResultados && validacionVaca && validacionAlimentos && mostrarIndEcon && (<div className="seccion">
+                {mostrarResultados && validacionVaca && validacionAlimentos && mostrarIndEcon && (<div className="seccion" ref={datosEconRef}>
                     <h2>DATOS ECONÓMICOS DE LA RACIÓN</h2>
                     <hr />
                     <h3>FORMATO DE MONEDA</h3>
@@ -599,7 +647,7 @@ function GestionRacion(props) {
                 </div>)}
                 {(mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && !mostrarResEcon) && (
                     <button onClick={handleClick3}>VER RESULTADOS ECONÓMICOS</button>)}
-                {(mostrarResultados && validacionVaca && validacionAlimentos && mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && mostrarResEcon) && (<div>
+                {(mostrarResultados && validacionVaca && validacionAlimentos && mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && mostrarResEcon) && (<div ref={resEconRef}>
                     <ResultadosEconomicos alimentosRacion={alimentosRacion} precioLitro={precioLitro}
                         precioKgSU={precioKgSU} codigoMoneda={codigoMoneda} decimales={decimales} racionMSCons={racionMSCons}
                         produccionIndividual={produccionIndividual} lecheSolidos={lecheSolidos}

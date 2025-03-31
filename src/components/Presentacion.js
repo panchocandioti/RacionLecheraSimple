@@ -180,22 +180,29 @@ function Presentacion() {
                     <BotonReset />
                 </div>)}
                 <footer className='footer'>
-                    <div>
-                        <p><b>Desarrollador:</b></p>
-                        <p><b><a href='https://www.linkedin.com/in/francisco-candioti-0b167834/' target="_blank" rel="noopener noreferrer">Ing. Agr. EPL Francisco Candioti</a></b></p>
-                        <hr></hr>
-                        <p>Convenio Marco de Cooperación Técnico-Científica:</p>
-                        <p><b>Universidad Nacional del Litoral - SALTO AGRO S.S.</b></p>
-                    </div>
+                <div>
+                    <p>Convenio Marco de Cooperación Técnico-Científica:</p>
+                    <p><b>Universidad Nacional del Litoral - SALTO AGRO S.S.</b></p>
+                    <hr></hr>
+                    <p>Desarrolladores:</p>
                     <div className='containerLogos'>
-                        <div className='logos'>
-                            <img src={LogoSaltoAgro} className='logo' alt='LogoSalto'></img>
+                        <div className='desarrolladores'>
+                            <p><b><a href='https://www.linkedin.com/in/francisco-candioti-0b167834/' target="_blank" rel="noopener noreferrer">Ing. Agr. EPL Francisco Candioti</a></b></p>
                         </div>
-                        <div className='logos'>
-                            <img src={LogoUNLFCA} className='logo' alt='LogoUNLFCA'></img>
+                        <div className='desarrolladores'>
+                            <p><b><a href='https://ar.linkedin.com/in/javier-baudracco-b97aab15' target="_blank" rel="noopener noreferrer">Dr. Javier Baudracco</a></b></p>
                         </div>
                     </div>
-                </footer>
+                </div>
+                <div className='containerLogos'>
+                    <div className='logos'>
+                        <img src={LogoSaltoAgro} className='logo' alt='LogoSalto'></img>
+                    </div>
+                    <div className='logos'>
+                        <img src={LogoUNLFCA} className='logo' alt='LogoUNLFCA'></img>
+                    </div>
+                </div>
+            </footer>
             </div>
         </div>
     )

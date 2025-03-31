@@ -9,9 +9,10 @@ import divisas from './Divisas'
 import ResultadosEconomicos from "./ResultadosEconomicos";
 import vaquita from "../images/vaquita.png";
 import pasto from "../images/pasto.png";
-import resfisicos from "../images/resfisicos.png";
-import datosecon from "../images/datoseconomicos.png";
-import resecon from "../images/reseconomicos.png";
+import resfisicos from "../images/bar-chart-steps.svg";
+import datosecon from "../images/currency-dollar.svg";
+import resecon from "../images/graph-up-arrow.svg";
+import home from "../images/house.svg";
 
 function GestionRacion(props) {
     const [nombreCaso, setNombreCaso] = useState("");
@@ -316,8 +317,16 @@ function GestionRacion(props) {
         }
     };
 
+    const homeRef = useRef(null);
+    const handleHomeScroll = () => {
+        if (homeRef.current) {
+            const elementPosition = homeRef.current.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: elementPosition - 250, behavior: "smooth" });
+        }
+    };
+
     return (
-        <div>
+        <div ref={homeRef}>
             {!mostrarBaseAlimentos && (<div>
                 <nav id="barra-navegacion">
                     <button className="botonNavegacion" onClick={() => descargarJSON("datosRacion.json")}>
@@ -325,6 +334,9 @@ function GestionRacion(props) {
                     </button>
                     <button className="botonNavegacion" onClick={manejarClickBoton}>
                         <img src={folder} title="Importar ración" alt="Importar ración" />
+                    </button>
+                    <button className="botonNavegacion" onClick={handleHomeScroll}>
+                        <img src={home} title="Inicio" alt="Inicio" />
                     </button>
                     <button className="botonNavegacion" onClick={handleVacaScroll}>
                         <img src={vaquita} title="Datos vaca lechera" alt="Datos vaca lechera" />
@@ -602,11 +614,11 @@ function GestionRacion(props) {
                             <thead>
                                 <tr>
                                     <th>Alimento</th>
-                                    <th>Ofrecido <i>Tal Cual</i></th>
+                                    <th>Costo/kgTC ofrecido</th>
                                     <th>Materia Seca</th>
-                                    <th>MS Ofrecida</th>
+                                    <th>Costo/kgMS Ofrecido</th>
                                     <th>Aprovechado</th>
-                                    <th>MS Consumida</th>
+                                    <th>Costo/kgMS Consumido</th>
                                 </tr>
                             </thead>
                             <tbody>

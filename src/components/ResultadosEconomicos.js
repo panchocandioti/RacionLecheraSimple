@@ -42,7 +42,7 @@ function ResultadosEconomicos(props) {
                         <tr>
                             <th>Alimento</th>
                             <th>MS Consumida</th>
-                            <th>Costo MS consumida</th>
+                            <th>Costo/kgMS consumida</th>
                             <th>Subtotal</th>
                             <th>% sobre costo ración</th>
                         </tr>
@@ -77,8 +77,8 @@ function ResultadosEconomicos(props) {
                     <thead>
                         <tr>
                             <th>Alimento</th>
-                            <th>Costo EM consumida</th>
-                            <th>Costo PB consumida</th>
+                            <th>Costo/MCalEM consumida</th>
+                            <th>Costo/kgPB consumida</th>
                         </tr>
                     </thead>
                     <tbody>

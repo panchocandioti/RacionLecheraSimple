@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ImagotipoNegro from "../images/Imagotipo NEGRO.png";
 import LogoSaltoAgro from "../images/LogoSaltoAgro.png";
 import LogoUNLFCA from "../images/logo-UNL-FCA.png";
@@ -15,6 +15,21 @@ function Presentacion() {
     const [mostrarTerminos, setMostrarTerminos] = useState(false);
     const [mostrarRegistro, setMostrarRegistro] = useState(false);
 
+    const instruccionesRef = useRef(null);
+
+    useEffect(() => {
+        // Esperar un pequeño tiempo para asegurarnos de que el DOM está listo
+        setTimeout(() => {
+            if (instruccionesRef.current) {
+                const elementPosition = instruccionesRef.current.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({ top: elementPosition - 220, behavior: "smooth" });
+            }
+        }, 200); // Puedes ajustar este tiempo si es necesario
+    }, []);
+
+    useEffect(() => {
+
+    })
 
     const manejarOnClick1 = () => {
         setMostrarInstrucciones(!mostrarInstrucciones);
@@ -54,7 +69,7 @@ function Presentacion() {
             <div>
                 {mostrarInstrucciones && (<div className="seccion">
                     <h2>Instrucciones:</h2>
-                    <div id="instrucciones">
+                    <div id="instrucciones" ref={instruccionesRef}>
                         <button onClick={manejarOnClick3} className='mostrar'>
                             {mostrarGeneralidades === true ? "Generalidades y objetivos ˄ " : "Generalidades y objetivos ˅ "}
                         </button>

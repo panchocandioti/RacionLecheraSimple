@@ -234,6 +234,12 @@ input::placeholder {
   margin: 10px;
 }
 
+.resultados2 {
+  max-width: 900px;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
 #MiLecheria {
   max-height: 65px;
   max-width: 85vw;

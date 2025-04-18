@@ -4,6 +4,8 @@ import GraficoConsumo from "./GraficoConsumo";
 import GraficoEnergia from "./GraficoEnergia";
 import GraficoProteina from "./GraficoProteina";
 import GraficoForrajeConcentrado from "./GraficoForrajeConcentrado";
+import arrowup from "../images/arrowup.png";
+import arrowdown from "../images/arrowdown.png";
 
 function ResultadosRacion(props) {
     const alimentosRacion = props.alimentosRacion;
@@ -49,6 +51,14 @@ function ResultadosRacion(props) {
     const concentradoPorciento = (100 - parseFloat(forrajePorciento)).toFixed(0);
     const metanoEmitidoKgDia = ((parseFloat(racionEMCons) / 0.82) / (parseFloat(racionCE / 3.6))) * (-10 * parseFloat(racionCE) / 3.6 + 12) / 1329;
     const metanoEmitidoGramosLitro = (metanoEmitidoKgDia * 1000 / parseFloat(produccionIndividual)).toFixed(1);
+    const saldoEM = parseFloat(racionEMCons) - parseFloat(reqEMTotal);
+    let kgananciaPeso;
+    if (saldoEM >= 0) { kgananciaPeso = (0.35 * parseFloat(racionCE) / 4.4 + 0.42) * .95 }
+    else { kgananciaPeso = 0.84 };
+    const variacionPeso = (parseFloat(saldoEM) * parseFloat(kgananciaPeso) * .95 / 4.54).toFixed(3);
+    let mensajeVariacionPeso;
+    if (saldoEM >= 0) { mensajeVariacionPeso = "Ganancia diaria de peso estimada" }
+    else { mensajeVariacionPeso = "Pérdida diaria de peso estimada" };
 
     return (
         <div>
@@ -129,8 +139,6 @@ function ResultadosRacion(props) {
                             </tfoot>
                         </table>
                     </div>
-
-
                 </div>
                 <hr />
                 <h3>GRÁFICOS BALANCE</h3>
@@ -183,6 +191,20 @@ function ResultadosRacion(props) {
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <hr />
+                <h3>VARIACIÓN DE PESO</h3>
+                <h5>{mensajeVariacionPeso}</h5>
+                <div className="resultados resultados2">
+                    <div className="containerIcons">
+                        <div>
+                            <h3 style={{ color: saldoEM < 0 ? 'red' : 'black' }}><b>{variacionPeso} kg/día</b></h3>
+                        </div>
+                        <div>
+                            {saldoEM >= 0 && (<img className="icon" src={arrowup}></img>)}
+                            {saldoEM < 0 && (<img className="icon" src={arrowdown}></img>)}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

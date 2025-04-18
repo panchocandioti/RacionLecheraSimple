@@ -150,6 +150,20 @@ function ResultadosRacion(props) {
                     <GraficoProteina racionPBCons={racionPBCons} reqPBTotal={reqPBTotal} />
                 </div>
                 <hr />
+                <h3>VARIACIÓN DE PESO</h3>
+                <h5>{mensajeVariacionPeso}</h5>
+                <div className="resultados resultados2">
+                    <div className="containerIcons">
+                        <div>
+                            <h3 style={{ color: saldoEM < 0 ? 'red' : 'black' }}><b>{variacionPeso} kg/día</b></h3>
+                        </div>
+                        <div>
+                            {saldoEM >= 0 && (<img className="icon" src={arrowup}></img>)}
+                            {saldoEM < 0 && (<img className="icon" src={arrowdown}></img>)}
+                        </div>
+                    </div>
+                </div>
+                <hr />
                 <h3>EFICIENCIA DE CONVERSIÓN</h3>
                 <h5>Conversión de materia seca ofrecida y consumida</h5>
                 <div className='table-responsive'>
@@ -191,20 +205,6 @@ function ResultadosRacion(props) {
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <hr />
-                <h3>VARIACIÓN DE PESO</h3>
-                <h5>{mensajeVariacionPeso}</h5>
-                <div className="resultados resultados2">
-                    <div className="containerIcons">
-                        <div>
-                            <h3 style={{ color: saldoEM < 0 ? 'red' : 'black' }}><b>{variacionPeso} kg/día</b></h3>
-                        </div>
-                        <div>
-                            {saldoEM >= 0 && (<img className="icon" src={arrowup}></img>)}
-                            {saldoEM < 0 && (<img className="icon" src={arrowdown}></img>)}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import 'bootstrap/dist/css/bootstrap.css'
 import trash from '../images/trash.svg'
 import edit from '../images/pencil-square.svg'
@@ -26,7 +26,7 @@ function GestionAlimentos() {
     const manejarOnClick1 = () => {
         setMostrarBaseAlimentos(!mostrarBaseAlimentos);
     };
-    
+
     // Guardar datos en un archivo JSON
     const descargarJSON = (nombreArchivo = "baseAlimentos.json") => {
         const datosStr = JSON.stringify(baseAlimentos, null, 2);
@@ -90,6 +90,7 @@ function GestionAlimentos() {
     const editarAlimento = (id) => {
         setMostrarEditarAlimentos(true);
         setMostrarAgregarAlimentos(false);
+        handleEdicionAlimentoScroll();
         const selectedId = id;
         const alimento = alimentosActivos.find((p) => p.id === selectedId);
         setAlimentoSeleccionado(alimento);
@@ -98,7 +99,6 @@ function GestionAlimentos() {
         setNuevaMS(alimento ? alimento.ms : null);
         setNuevaCE(alimento ? alimento.ce : null);
         setNuevaPB(alimento ? alimento.pb : null);
-        window.location.href = '#cambiosAlimento';
     }
 
     const modificarAlimento = () => {
@@ -117,6 +117,14 @@ function GestionAlimentos() {
         setNuevaCE(null);
         setNuevaPB(null);
         setMostrarEditarAlimentos(false);
+    };
+
+    const edicionAlimentoRef = useRef(null);
+    const handleEdicionAlimentoScroll = () => {
+        if (edicionAlimentoRef.current) {
+            const elementPosition = edicionAlimentoRef.current.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: elementPosition - 100, behavior: "smooth" });
+        }
     };
 
     // Eliminar un alimento
@@ -175,7 +183,7 @@ function GestionAlimentos() {
                 <button onClick={() => descargarJSON("baseAlimentos.json")}>Guardar archivo</button>
                 <input type="file" onChange={cargarJSON} />
                 <hr />
-                <h5 id="cambiosAlimento">Cantidad de alimentos activos: {cantidadAlimentos}</h5>
+                <h5 ref={edicionAlimentoRef}>Cantidad de alimentos activos: {cantidadAlimentos}</h5>
                 {baseGenericaActiva && (
                     <h6 style={{ color: "red" }}>Trabajando con base genérica de alimentos</h6>)}
                 {!baseGenericaActiva && (<div>
@@ -373,10 +381,10 @@ function GestionAlimentos() {
                         </tbody>
                     </table>
                 </div>
-                
+
             </div>)}
             <button className="button" onClick={manejarOnClick1}>{mostrarBaseAlimentos === true ? "Volver a ración" : "Mostrar base alimentos"}</button>
-            <GestionRacion baseAlimentos={alimentosActivos} baseGenericaActiva={baseGenericaActiva} mostrarBaseAlimentos={mostrarBaseAlimentos}/>
+            <GestionRacion baseAlimentos={alimentosActivos} baseGenericaActiva={baseGenericaActiva} mostrarBaseAlimentos={mostrarBaseAlimentos} />
         </div>
     );
 

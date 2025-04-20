@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import trash from '../images/trash.svg';
+import edit from '../images/pencil-square.svg'
 import floppy from '../images/floppy.svg';
 import folder from '../images/folder2-open.svg';
 import ResultadosRacion from "./ResultadosRacion";
@@ -457,6 +458,36 @@ function GestionRacion(props) {
                             </select>
                         </div>
 
+
+                        <div className='table-responsive'>
+                            <table className="table table-sm table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Alimento</th>
+                                        <th scope="col">Clasificación</th>
+                                        <th scope="col">Materia Seca</th>
+                                        <th scope="col">Conc. Energética</th>
+                                        <th scope="col">Proteina Bruta</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {alimentosRacion.map((alimento) => (
+                                        <tr>
+                                            <td>{alimento.nombre}</td>
+                                            <td>{alimento.clase}</td>
+                                            <td>{alimento.ms}%</td>
+                                            <td>{alimento.ce} MCalEM/kgMS</td>
+                                            <td>{alimento.pb}%</td>
+                                            <td><button onClick={() => eliminarAlimento(alimento.id)}><img src={trash} title="Eliminar"></img></button></td>
+                                            <td><button><img src={edit} title="Editar"></img></button></td>
+                                        </tr>)
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5>Cantidades ofrecidas en la ración</h5>
                         <div className='table-responsive'>
                             <table className="table table-sm table-hover table-striped">
                                 <thead>
@@ -467,7 +498,6 @@ function GestionRacion(props) {
                                         <th>MS Ofrecida</th>
                                         <th>Aprovechado</th>
                                         <th>Consumo MS</th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -500,11 +530,6 @@ function GestionRacion(props) {
                                                 /> %
                                             </td>
                                             <td>{(alimento.kgcons)} kgMS</td>
-                                            <td>
-                                                <button onClick={() => eliminarAlimento(alimento.id)}>
-                                                    <img src={trash} title="Eliminar" alt="Eliminar" />
-                                                </button>
-                                            </td>
                                         </tr>)
                                     )}
                                 </tbody>
@@ -516,7 +541,6 @@ function GestionRacion(props) {
                                         <td>{racionMSOfrecida} kgMS</td>
                                         <td>{(racionMSOfrecida > 0 && alimentosRacion.length > 1) && ((racionAprPorciento) + "%")}</td>
                                         <td>{racionMSCons} kgMS</td>
-                                        <td></td>
                                     </tr>
                                 </tfoot>
                             </table>

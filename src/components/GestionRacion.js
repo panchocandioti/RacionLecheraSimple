@@ -23,9 +23,9 @@ function GestionRacion(props) {
     const [lechePB, setLechePB] = useState("");
     const [datosVaca, setDatosVaca] = useState([]);
     const baseAlimentos = props.baseAlimentos;
-    const baseGenericaActiva = props.baseGenericaActiva;
     const mostrarBaseAlimentos = props.mostrarBaseAlimentos;
     const [alimentoSeleccionado, setAlimentoSeleccionado] = useState("");
+    const [mostrarEditarAlimentos, setMostrarEditarAlimentos] = useState(false);
     const [alimentosRacion, setAlimentosRacion] = useState([]);
     const [datosSesion, setDatosSesion] = useState([]);
     const [carga, setCarga] = useState(false);
@@ -40,7 +40,12 @@ function GestionRacion(props) {
     const [mostrarResEcon, setMostrarResEcon] = useState(false);
     const [sistema, setSistema] = useState('');
     const [archivoActivo, setArchivoActivo] = useState("Ningún archivo seleccionado");
-    
+    const [nuevoNombre, setNuevoNombre] = useState("");
+    const [nuevaMS, setNuevaMS] = useState(null);
+    const [nuevaCE, setNuevaCE] = useState(null);
+    const [nuevaPB, setNuevaPB] = useState(null);
+    const [clasificacion, setClasificacion] = useState('');
+
     const archivoAlimentosActivo = props.archivoActivo;
 
     let decimales2 = 0;
@@ -203,7 +208,46 @@ function GestionRacion(props) {
         setAlimentosRacion((prev) => prev.filter((alimento) => alimento.id !== id));
     };
 
+    // Editar alimento
 
+    const editarAlimento = (id) => {
+        setMostrarEditarAlimentos(true);
+        handleEdicionAlimentoScroll();
+        const selectedId = id;
+        const alimento = alimentosRacion.find((p) => p.id === selectedId);
+        setAlimentoSeleccionado(alimento);
+        setNuevoNombre(alimento ? alimento.nombre : "");
+        setClasificacion(alimento ? alimento.clase : "");
+        setNuevaMS(alimento ? alimento.ms : null);
+        setNuevaCE(alimento ? alimento.ce : null);
+        setNuevaPB(alimento ? alimento.pb : null);
+    }
+
+    const modificarAlimento = () => {
+        if (!alimentoSeleccionado) return;
+        setAlimentosRacion((prevDatos) =>
+            prevDatos.map((alimento) =>
+                alimento.id === alimentoSeleccionado.id
+                    ? { ...alimento, nombre: nuevoNombre, clase: clasificacion, ms: parseFloat(nuevaMS), ce: parseFloat(nuevaCE), pb: parseFloat(nuevaPB) }
+                    : alimento
+            )
+        );
+        setAlimentoSeleccionado(null);
+        setNuevoNombre("");
+        setClasificacion("");
+        setNuevaMS(null);
+        setNuevaCE(null);
+        setNuevaPB(null);
+        setMostrarEditarAlimentos(false);
+    };
+
+    const edicionAlimentoRef = useRef(null);
+    const handleEdicionAlimentoScroll = () => {
+        if (edicionAlimentoRef.current) {
+            const elementPosition = edicionAlimentoRef.current.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: elementPosition - 160, behavior: "smooth" });
+        }
+    };
 
     //Indicadores de la ración y otros
     const racionMVOfrecida = alimentosRacion.reduce((acumulador, alimento) => acumulador + parseFloat(alimento.kgtc), 0).toFixed(1);
@@ -443,7 +487,7 @@ function GestionRacion(props) {
                     <div>
                         <div ref={alimentosRef}>
                             <h3>ALIMENTOS OFRECIDOS</h3>
-                                <h6>Base de alimentos activa: <b>{archivoAlimentosActivo}</b></h6>
+                            <h6>Base de alimentos activa: <b>{archivoAlimentosActivo}</b></h6>
                             <h5>Ingredientes de la ración</h5>
                             <select
                                 value={alimentoSeleccionado ? alimentoSeleccionado.id : ""}
@@ -482,12 +526,97 @@ function GestionRacion(props) {
                                             <td>{alimento.ce} MCalEM/kgMS</td>
                                             <td>{alimento.pb}%</td>
                                             <td><button onClick={() => eliminarAlimento(alimento.id)}><img src={trash} title="Eliminar"></img></button></td>
-                                            <td><button><img src={edit} title="Editar"></img></button></td>
+                                            <td><button onClick={() => editarAlimento(alimento.id)}><img src={edit} title="Editar"></img></button></td>
                                         </tr>)
                                     )}
                                 </tbody>
                             </table>
                         </div>
+                        <div ref={edicionAlimentoRef}></div>
+                        {mostrarEditarAlimentos && (<div>
+                            {alimentoSeleccionado && (
+                                <div>
+                                    <hr />
+                                    <h5>Editando: {alimentoSeleccionado.nombre}</h5>
+                                    <form>
+                                        <label>Denominación: </label>
+                                        <input
+                                            type="text"
+                                            value={nuevoNombre}
+                                            onChange={(e) => setNuevoNombre(e.target.value)}
+                                            placeholder="Modificar nombre"
+                                        />
+                                        <br />
+                                        <div>
+                                            <label>Clasificación: </label>
+                                            <label>
+                                                <input
+                                                    className="radio"
+                                                    type="radio"
+                                                    value="forraje"
+                                                    checked={clasificacion === 'forraje'}
+                                                    onChange={manejarCambio}
+                                                />
+                                                Forraje
+                                            </label>
+                                            <label>
+                                                <input
+                                                    className="radio"
+                                                    type="radio"
+                                                    value="concentrado"
+                                                    checked={clasificacion === 'concentrado'}
+                                                    onChange={manejarCambio}
+                                                />
+                                                Concentrado
+                                            </label>
+                                        </div>
+                                        <br />
+                                        <label>Materia seca (%): </label>
+                                        <input
+                                            type="number"
+                                            value={nuevaMS}
+                                            onChange={(e) => {
+                                                const newValue = e.target.value;
+                                                if (newValue >= 0 && newValue <= 100) {
+                                                    setNuevaMS(newValue);
+                                                }
+                                            }}
+                                            placeholder="Modificar Materia Seca (%)"
+                                        />
+                                        <br />
+                                        <label>Concentración Energética (MCalEM/kgMS): </label>
+                                        <input
+                                            type="number"
+                                            value={nuevaCE}
+                                            onChange={(e) => {
+                                                const newValue = e.target.value;
+                                                if (newValue >= 0 && newValue <= 8) {
+                                                    setNuevaCE(newValue);
+                                                }
+                                            }}
+                                            placeholder="Modificar CE (MCalEM/kgMS)"
+                                        />
+                                        <br />
+                                        <label>Concentración Proteica (%PB): </label>
+                                        <input
+                                            type="number"
+                                            value={nuevaPB}
+                                            onChange={(e) => {
+                                                const newValue = e.target.value;
+                                                if (newValue >= 0 && newValue <= 300) {
+                                                    setNuevaPB(newValue);
+                                                }
+                                            }}
+                                            placeholder="Modificar PB (%)"
+                                        />
+                                    </form>
+                                    <br />
+                                    <button onClick={modificarAlimento}>Guardar Cambios</button>
+                                </div>
+                            )}
+                            <hr />
+                        </div>)}
+
                         <h5>Cantidades ofrecidas en la ración</h5>
                         <div className='table-responsive'>
                             <table className="table table-sm table-hover table-striped">

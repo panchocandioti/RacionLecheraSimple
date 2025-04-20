@@ -9,6 +9,7 @@ import GestionRacion from './GestionRacion';
 function GestionAlimentos() {
     const alimentosGenericos = AlimentosBaseGenerica[1];
     const [baseGenericaActiva, setBaseGenericaActiva] = useState(true);
+    const [archivoActivo, setArchivoActivo] = useState("Base genérica de alimentos");
     const [alimentosActivos, setAlimentosActivos] = useState(alimentosGenericos);
     const [baseAlimentos, setBaseAlimentos] = useState(["baseAlimentos", alimentosActivos]);
     const [alimentoSeleccionado, setAlimentoSeleccionado] = useState(null); // ID del alimento seleccionado
@@ -51,6 +52,7 @@ function GestionAlimentos() {
                 if (datosCargados[0] === "baseAlimentos") {
                     setAlimentosActivos(datosCargados[1]);
                     setBaseGenericaActiva(false);
+                    setArchivoActivo(file.name);
                 } else {
                     alert("ERROR: El archivo seleccionado no es válido.");
                 }
@@ -184,12 +186,12 @@ function GestionAlimentos() {
                 <input type="file" onChange={cargarJSON} />
                 <hr />
                 <h5 ref={edicionAlimentoRef}>Cantidad de alimentos activos: {cantidadAlimentos}</h5>
-                {baseGenericaActiva && (
-                    <h6 style={{ color: "red" }}>Trabajando con base genérica de alimentos</h6>)}
+                    <h6>Archivo activo: <b>{archivoActivo}</b></h6>
                 {!baseGenericaActiva && (<div>
-                    {mostrarEditarAlimentos === false && (<button onClick={() => mostrar1()}>{(mostrarAgregarAlimentos === false) ? "Agregar alimento" : "Ocultar agregar alimento"}</button>)}
                     <hr />
+                    {mostrarEditarAlimentos === false && (<button onClick={() => mostrar1()}>{(mostrarAgregarAlimentos === false) ? "Agregar alimento" : "Ocultar agregar alimento"}</button>)}
                     {mostrarAgregarAlimentos && (<div>
+                    <hr />
                         <form>
                             <h5>Agregar alimento</h5>
                             <label>Denominación: </label>
@@ -384,7 +386,8 @@ function GestionAlimentos() {
 
             </div>)}
             <button className="button" onClick={manejarOnClick1}>{mostrarBaseAlimentos === true ? "Volver a ración" : "Mostrar base alimentos"}</button>
-            <GestionRacion baseAlimentos={alimentosActivos} baseGenericaActiva={baseGenericaActiva} mostrarBaseAlimentos={mostrarBaseAlimentos} />
+            <GestionRacion baseAlimentos={alimentosActivos} baseGenericaActiva={baseGenericaActiva} mostrarBaseAlimentos={mostrarBaseAlimentos} 
+                archivoActivo={archivoActivo} />
         </div>
     );
 

@@ -40,6 +40,8 @@ function GestionRacion(props) {
     const [mostrarResEcon, setMostrarResEcon] = useState(false);
     const [sistema, setSistema] = useState('');
     const [archivoActivo, setArchivoActivo] = useState("Ningún archivo seleccionado");
+    
+    const archivoAlimentosActivo = props.archivoActivo;
 
     let decimales2 = 0;
     if (decimales > 1) { decimales2 = decimales - 1 } else { decimales2 = 0 };
@@ -441,8 +443,7 @@ function GestionRacion(props) {
                     <div>
                         <div ref={alimentosRef}>
                             <h3>ALIMENTOS OFRECIDOS</h3>
-                            {baseGenericaActiva && (
-                                <h6 style={{ color: "red" }}>Trabajando con base genérica de alimentos</h6>)}
+                                <h6>Base de alimentos activa: <b>{archivoAlimentosActivo}</b></h6>
                             <h5>Ingredientes de la ración</h5>
                             <select
                                 value={alimentoSeleccionado ? alimentoSeleccionado.id : ""}

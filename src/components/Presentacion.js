@@ -74,64 +74,57 @@ function Presentacion() {
                             {mostrarGeneralidades === true ? "Generalidades y objetivos ˄ " : "Generalidades y objetivos ˅ "}
                         </button>
                         {mostrarGeneralidades && (<div className='contenido-instrucciones'>
-                            <p>Introducción, generalidades.</p>
                             <p><b>Objetivo de esta aplicación</b></p>
-                            <p><b>Estimar el resultado económico de un establecimiento lechero en forma sencilla y rápida, permitiendo además el
-                                análisis de los distintos factores que lo determinan.</b></p>
+                            <p><b>Formular una ración lechera en forma sencilla y ágil, permitiendo su evaluación en términos físicos y económicos</b></p>
                             <p>La aplicación puede utilizarse para:</p>
                             <ul>
-                                <li>Evaluar situaciones desconocidas o hipotéticas</li>
-                                <li>Diagnosticar situaciones en marcha</li>
-                                <li>Encontrar rápido los rubros de mayor impacto en el resultado</li>
-                                <li>Evaluar situaciones alternativas</li>
+                                <li>Evaluar resultados físicos y económicos de una ración real</li>
+                                <li>Proponer soluciones a problemas eventuales de la ración</li>
+                                <li>Estimar resultados de raciones superadoras en términos físicos y económicos</li>
+                                <li>Optimizar el uso de los alimentos disponibles</li>
+                                <li>Decidir la incorporación de nuevos alimentos</li>
                                 <li>Uso didáctico en general</li>
                             </ul>
-                            <p>El usuario deberá ingresar parámetros relativamente simples, divididos en seis pasos:</p>
+                            <p>El usuario deberá ingresar parámetros relativamente simples, divididos en tres pasos:</p>
                             <ol>
-                                <li>Indicadores físicos</li>
-                                <li>Ingresos brutos por ventas</li>
-                                <li>Gasto en mano de obra</li>
-                                <li>Reposición y variación de rodeo</li>
-                                <li>Otros gastos directos</li>
-                                <li>Gastos de estructura</li>
+                                <li>Datos de la vaca lechera (vaca promedio del rodeo)</li>
+                                <li>Alimentos ofrecidos (selección de alimentos y cantidades)</li>
+                                <li>Datos económicos de la ración (precios de leche y alimentos)</li>
                             </ol>
-                            <p>Durante la carga, para cada input podrá consultarse una definición simplificada o un breve
-                                mensaje de ayuda. Los valores ingresados podrán cambiarse en cualquier momento.</p>
-                            <p>Es importante entender que esta aplicación está concebida como una calculadora
-                                (facilita y ordena el cálculo y la interpretación de resultados). No es un modelo de simulación
-                                (no simula procesos). La calidad de la información ingresada por el usuario es su entera
-                                responsabilidad y condiciona la calidad de los resultados obtenidos.</p>
+                            <p>Los valores ingresados podrán cambiarse en cualquier momento.</p>
+                            <p>La calidad de la información ingresada por el usuario es su entera responsabilidad y condiciona la calidad de los resultados obtenidos.</p>
                         </div>)}
                         <br></br>
                         <button onClick={manejarOnClick4} className='mostrar'>
                             {mostrarResultados === true ? "Resultados que se obtienen ˄ " : "Resultados que se obtienen ˅ "}
                         </button>
                         {mostrarResultados && (<div className='contenido-instrucciones'>
-                            <p>Parciales:</p>
+                            <p>Resultados físicos:</p>
                             <ul>
-                                <li>Resumen de indicadores físicos</li>
-                                <li>Resumen de ingresos brutos por ventas</li>
-                                <li>Resumen de mano de obra</li>
-                                <li>Resumen de reposición y variación de rodeo</li>
-                                <li>Resumen de otros gastos directos</li>
-                                <li>Resumen de gastos de estructura</li>
+                                <li>Resumen de requerimientos nutricionales</li>
+                                <li>Resumen de nutrientes aportados por la ración</li>
+                                <li>Gráfico de evaluación de consumo</li>
+                                <li>Gráfico de relación forraje : concentrado</li>
+                                <li>Gráfico de balance de energía metabólica</li>
+                                <li>Gráfico de balance de proteína bruta</li>
+                                <li>Estimación de la variación de peso vivo</li>
+                                <li>Cálculos de eficiencia de conversión</li>
+                                <li>Cálculos de emisión de metano entérico</li>
                             </ul>
-                            <p>Finales:</p>
+                            <p>Resultados económicos:</p>
                             <ul>
-                                <li>Costo de producción – Análisis por litro</li>
-                                <li>Resultado operativo – Análisis por litro</li>
-                                <li>Resultado operativo – Montos anuales y porcentuales del Ingreso Bruto</li>
-                                <li>Otras expresiones de resultado operativo</li>
-                                <li>Gráficos de distribución del Ingreso Bruto</li>
+                                <li>Costo de la ración y del kilogramo de materia seca consumido</li>
+                                <li>Costo por unidad de energía metabólica y proteína bruta</li>
+                                <li>Ingresos por venta de leche</li>
+                                <li>Costo y margen de alimentación</li>
+                                <li>Gráfico de costo y margen de alimentación</li>
                             </ul>
-                            <p>Los resultados, parciales y finales, podrán visualizarse expresados en distintas unidades,
-                                para facilitar el análisis (anuales, mensuales, % del IB, % del IB Leche, por litro,
-                                por hectárea, por vaca), según su naturaleza.</p>
-                            <p>A su vez, todas las expresiones en dinero podrán visualizarse en dos monedas diferentes,
-                                a elección del usuario.</p>
-                            <p>Se podrá descargar un reporte en PDF con todos los resultados. El reporte se emite en la
-                                moneda activa al momento de generarlo. Si se realizan cambios posteriores (incluyendo la moneda
-                                activa) pueden volver a generarse nuevos reportes.</p>
+                            <p>Los resultados, físicos y económicos, podrán visualizarse expresados en distintas unidades,
+                                para facilitar el análisis (por litro, por kilogramos de sólidos, en dinero, en litros de leche, como porcentaje del ingreso por leche), según su naturaleza.</p>
+                            <p>Para las expresiones en dinero el usuario podrá seleccionar la moneda y el formato decimal a utilizar.</p>
+                            <p>Se podrán descargar reportes en PDF con los resultados físicos y económicos respectivamente.</p>
+                            <p>La aplicación permite guardar y recuperar los datos de las distintas raciones generadas.</p>
+                            <p>La aplicación provee una base genérica de alimentos. El usuario puede generar su propia base de alimentos en base a ésta y agregar, quitar y modificar los alimentos según su criterio.</p>
                         </div>)}
                         <br></br>
                         <button onClick={manejarOnClick5} className='mostrar'>
@@ -140,12 +133,12 @@ function Presentacion() {
                         {mostrarSecuencia && (<div className='contenido-instrucciones'>
                             <ol>
                                 <li>Diagnóstico (situación inicial)</li>
-                                <li>Generación de reporte PDF inicial</li>
+                                <li>Generación de archivo JSON y reporte PDF inicial</li>
                                 <li>Detección de puntos críticos</li>
                                 <li>¿Qué pasaría si...? (pruebas)</li>
                                 <li>Selección de alternativa exitosa</li>
                                 <li>Análisis de los resultados y ajustes</li>
-                                <li>Generación de reporte PDF final</li>
+                                <li>Generación de archivo JSON y reporte PDF final</li>
                             </ol>
                         </div>)}
                         <br></br>

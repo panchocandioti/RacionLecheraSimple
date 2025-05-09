@@ -88,8 +88,8 @@ function Presentacion() {
                             <p>El usuario deberá ingresar parámetros relativamente simples, divididos en tres pasos:</p>
                             <ol>
                                 <li>Datos de la vaca lechera (vaca promedio del rodeo)</li>
-                                <li>Alimentos ofrecidos (selección de alimentos y cantidades)</li>
-                                <li>Datos económicos de la ración (precios de leche y alimentos)</li>
+                                <li>Alimentos ofrecidos (selección de los alimentos y sus cantidades)</li>
+                                <li>Datos económicos de la ración (precio de la leche y costos de los alimentos)</li>
                             </ol>
                             <p>Los valores ingresados podrán cambiarse en cualquier momento.</p>
                             <p>La calidad de la información ingresada por el usuario es su entera responsabilidad y condiciona la calidad de los resultados obtenidos.</p>
@@ -120,11 +120,11 @@ function Presentacion() {
                                 <li>Gráfico de costo y margen de alimentación</li>
                             </ul>
                             <p>Los resultados, físicos y económicos, podrán visualizarse expresados en distintas unidades,
-                                para facilitar el análisis (por litro, por kilogramos de sólidos, en dinero, en litros de leche, como porcentaje del ingreso por leche), según su naturaleza.</p>
+                                para facilitar el análisis (por litro, por kilogramos de sólidos, en dinero, en litros de leche, como porcentaje del ingreso por leche, etc.), según su naturaleza.</p>
                             <p>Para las expresiones en dinero el usuario podrá seleccionar la moneda y el formato decimal a utilizar.</p>
                             <p>Se podrán descargar reportes en PDF con los resultados físicos y económicos respectivamente.</p>
-                            <p>La aplicación permite guardar y recuperar los datos de las distintas raciones generadas.</p>
-                            <p>La aplicación provee una base genérica de alimentos. El usuario puede generar su propia base de alimentos en base a ésta y agregar, quitar y modificar los alimentos según su criterio.</p>
+                            <p>La aplicación permite guardar y recuperar los datos de las distintas raciones generadas (archivos JSON).</p>
+                            <p>La aplicación provee una base genérica de alimentos. El usuario puede generar su propia base de alimentos en base a ésta, para luego agregar, quitar y modificar alimentos según su criterio.</p>
                         </div>)}
                         <br></br>
                         <button onClick={manejarOnClick5} className='mostrar'>

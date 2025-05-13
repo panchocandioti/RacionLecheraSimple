@@ -3,6 +3,7 @@ import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/render
 import LogoMiLecheria from "../images/Imagotipo AZUL.png";
 import LogoSaltoAgro from "../images/LogoSaltoAgro.png";
 import LogoUNLFCA from "../images/FCA-UNL-Logo.jpg";
+import Check from '../images/check_icon.png';
 
 const styles = StyleSheet.create({
   logoHeader: {
@@ -35,6 +36,10 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontWeight: 'bold',
     backgroundColor: 'lightgray',
+  },
+  tableCell3: {
+    width: '5%',
+    padding: 3,
   },
   title1: {
     textAlign: 'center',
@@ -308,6 +313,8 @@ function ResFisicosPDF(props) {
           </View>
         </View>
 
+        <Text style={styles.title3}>Título <View style={styles.tableCell3}><Image src={Check}></Image></View></Text>
+        
         <Text style={styles.footer}>Ración Lechera Simple - Desarrolladores: Ing. Agr. EPL Francisco Candioti / Dr. Javier Baudracco</Text>
         <View style={styles.tableLogos}>
           <View style={styles.tableRow}>

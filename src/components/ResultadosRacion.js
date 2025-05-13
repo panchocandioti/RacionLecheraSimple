@@ -226,7 +226,7 @@ function ResultadosRacion(props) {
                     />} fileName="reporteResultadosFisicos.pdf">
                         {({ blob, url, loading, error }) => {
                             return loading ? (
-                                <button disabled>Cargando documento...</button>
+                                <span>Cargando documento...</span>
                             ) : error ? (
                                 <span>Error al generar PDF</span>
                             ) : (

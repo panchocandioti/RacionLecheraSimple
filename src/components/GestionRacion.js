@@ -253,8 +253,8 @@ function GestionRacion(props) {
     const racionMVOfrecida = alimentosRacion.reduce((acumulador, alimento) => acumulador + parseFloat(alimento.kgtc), 0).toFixed(1);
     const racionMSOfrecida = alimentosRacion.reduce((acumulador, alimento) => acumulador + parseFloat(alimento.kgms), 0).toFixed(1);
     const racionMSCons = alimentosRacion.reduce((acumulador, alimento) => acumulador + parseFloat(alimento.kgcons), 0).toFixed(1);
-    const racionMSPorciento = (racionMSOfrecida / racionMVOfrecida * 100).toFixed(1);
-    const racionAprPorciento = (racionMSCons / racionMSOfrecida * 100).toFixed(1);
+    const racionMSPorciento = (parseFloat(racionMSOfrecida) / parseFloat(racionMVOfrecida) * 100).toFixed(1);
+    const racionAprPorciento = (parseFloat(racionMSCons) / parseFloat(racionMSOfrecida) * 100).toFixed(0);
     const lecheSolidos = (parseFloat(lecheGB) + parseFloat(lechePB)).toFixed(2);
 
     let validacionVaca = false;
@@ -684,7 +684,8 @@ function GestionRacion(props) {
                 {mostrarResultados && validacionVaca && validacionAlimentos && (<div ref={resFisicosRef}>
                     <ResultadosRacion pesoVivo={pesoVivo} produccionIndividual={produccionIndividual}
                         lecheGB={lecheGB} lechePB={lechePB} alimentosRacion={alimentosRacion} racionMSCons={racionMSCons}
-                        lecheSolidos={lecheSolidos} racionMSOfrecida={racionMSOfrecida} sistema={sistema}
+                        lecheSolidos={lecheSolidos} racionMSOfrecida={racionMSOfrecida} sistema={sistema} nombreCaso={nombreCaso}
+                        racionMVOfrecida={racionMVOfrecida} racionMSPorciento={racionMSPorciento} racionAprPorciento={racionAprPorciento}
                     />
                     {!mostrarIndEcon && (<button onClick={handleClick2}>CÁLCULOS ECONÓMICOS</button>)}
                 </div>)}

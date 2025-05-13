@@ -6,14 +6,23 @@ import GraficoProteina from "./GraficoProteina";
 import GraficoForrajeConcentrado from "./GraficoForrajeConcentrado";
 import arrowup from "../images/arrowup.png";
 import arrowdown from "../images/arrowdown.png";
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import ResFisicosPDF from "./ResFisicosPDF";
 
 function ResultadosRacion(props) {
     const alimentosRacion = props.alimentosRacion;
     const racionMSCons = props.racionMSCons;
+    const racionMVOfrecida = props.racionMVOfrecida;
+    const racionMSPorciento = props.racionMSPorciento;
     const racionMSOfrecida = props.racionMSOfrecida;
+    const racionAprPorciento = props.racionAprPorciento;
+    const pesoVivo = props.pesoVivo;
+    const lecheGB = props.lecheGB;
+    const lechePB = props.lechePB;
     const lecheSolidos = props.lecheSolidos;
     const produccionIndividual = props.produccionIndividual;
     const sistema = props.sistema;
+    const nombreCaso = props.nombreCaso;
     const produccionSolidos = (parseFloat(produccionIndividual) * parseFloat(lecheSolidos) / 100).toFixed(4);
     const [alimentosAporteEM, setAlimentosAporteEM] = useState([]);
     const [alimentosAportePB, setAlimentosAportePB] = useState([]);
@@ -80,20 +89,20 @@ function ResultadosRacion(props) {
                             <tbody>
                                 <tr>
                                     <td>Mantenimiento</td>
-                                    <td>{reqEMMant.toFixed(1)} MCalEM</td>
-                                    <td>{reqPBMant.toFixed(2)} kgPB</td>
+                                    <td>{reqEMMant.toFixed(1)} MCalEM/día</td>
+                                    <td>{reqPBMant.toFixed(2)} kgPB/día</td>
                                 </tr>
                                 <tr>
                                     <td>Producción</td>
-                                    <td>{(produccionIndividual * reqEMProd).toFixed(1)} MCalEM</td>
-                                    <td>{(produccionIndividual * reqPBProd).toFixed(2)} kgPB</td>
+                                    <td>{(produccionIndividual * reqEMProd).toFixed(1)} MCalEM/día</td>
+                                    <td>{(produccionIndividual * reqPBProd).toFixed(2)} kgPB/día</td>
                                 </tr>
                             </tbody>
                             <tfoot style={{ fontWeight: "bolder", borderTop: "gray solid 2px" }}>
                                 <tr>
                                     <td>Requerimiento global</td>
-                                    <td>{reqEMTotal.toFixed(1)} MCalEM</td>
-                                    <td>{reqPBTotal.toFixed(2)} kgPB</td>
+                                    <td>{reqEMTotal.toFixed(1)} MCalEM/día</td>
+                                    <td>{reqPBTotal.toFixed(2)} kgPB/día</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -119,8 +128,8 @@ function ResultadosRacion(props) {
                                 {alimentosRacion.map((alimento) => (
                                     <tr key={alimento.id}>
                                         <td>{alimento.nombre}</td>
-                                        <td>{(alimento.ce * alimento.kgcons).toFixed(1)} MCalEM</td>
-                                        <td>{(alimento.pb * alimento.kgcons / 100).toFixed(2)} kgPB</td>
+                                        <td>{(alimento.ce * alimento.kgcons).toFixed(1)} MCalEM/día</td>
+                                        <td>{(alimento.pb * alimento.kgcons / 100).toFixed(2)} kgPB/día</td>
                                         <td></td>
                                         <td>{alimento.ce} MCalEM/kgMS</td>
                                         <td>{alimento.pb}%</td>
@@ -130,8 +139,8 @@ function ResultadosRacion(props) {
                             <tfoot style={{ fontWeight: "bolder", borderTop: "gray solid 2px" }}>
                                 <tr>
                                     <td>Ración global</td>
-                                    <td>{racionEMCons.toFixed(1)} MCalEM</td>
-                                    <td>{racionPBCons.toFixed(2)} kgPB</td>
+                                    <td>{racionEMCons.toFixed(1)} MCalEM/día</td>
+                                    <td>{racionPBCons.toFixed(2)} kgPB/día</td>
                                     <td></td>
                                     <td>{(racionCE).toFixed(2)} MCalEM/kgMS</td>
                                     <td>{(racionPB).toFixed(1)}%</td>
@@ -205,6 +214,28 @@ function ResultadosRacion(props) {
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div style={{ backgroundColor: 'lightgray' }}>
+                    <PDFDownloadLink document={<ResFisicosPDF nombreCaso={nombreCaso} pesoVivo={pesoVivo}
+                        lecheGB={lecheGB} lechePB={lechePB} sistema={sistema} produccionIndividual={produccionIndividual}
+                        reqEMMant={reqEMMant} reqEMProd={reqEMProd} reqEMTotal={reqEMTotal} reqPBMant={reqPBMant}
+                        reqPBProd={reqPBProd} reqPBTotal={reqPBTotal} alimentosRacion={alimentosRacion}
+                        racionEMCons={racionEMCons} racionPBCons={racionPBCons} racionCE={racionCE} racionPB={racionPB}
+                        racionMSCons={racionMSCons} racionMVOfrecida={racionMVOfrecida} racionMSPorciento={racionMSPorciento}
+                        racionMSOfrecida={racionMSOfrecida} racionAprPorciento={racionAprPorciento}
+                    />} fileName="reporteResultadosFisicos.pdf">
+                        {({ blob, url, loading, error }) => {
+                            return loading ? (
+                                <button disabled>Cargando documento...</button>
+                            ) : error ? (
+                                <span>Error al generar PDF</span>
+                            ) : (
+                                <a href={url} download="reporteResultadosFisicos.pdf">
+                                    Resultados físicos - Descargar PDF
+                                </a>
+                            );
+                        }}
+                    </PDFDownloadLink>
                 </div>
             </div>
         </div>

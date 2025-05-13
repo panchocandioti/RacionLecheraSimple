@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
 import GraficoMargenAlimentacion from './GraficoMargenAlimentacion';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import ResEconomicosPDF from './ResEconomicosPDF';
 
 function ResultadosEconomicos(props) {
 
@@ -132,6 +134,21 @@ function ResultadosEconomicos(props) {
             <GraficoMargenAlimentacion codigoMoneda={codigoMoneda} ingresoLeche={ingresoLeche} racionCostoFormato={racionCostoFormato}
                 precioLitro={precioLitro} decimales={decimales}
             />
+            <div style={{ backgroundColor: "lightgray" }}>
+                <PDFDownloadLink document={<ResEconomicosPDF />} fileName="reporteResultadosEconomicos.pdf">
+                    {({ blob, url, loading, error }) => {
+                        return loading ? (
+                            <button disabled>Cargando documento...</button>
+                        ) : error ? (
+                            <span>Error al generar PDF</span>
+                        ) : (
+                            <a href={url} download="reporteResultadosEconomicos.pdf">
+                                Resultados económicos - Descargar PDF
+                            </a>
+                        );
+                    }}
+                </PDFDownloadLink>
+            </div>
         </div>
     )
 }

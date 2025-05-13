@@ -75,7 +75,7 @@ function Presentacion() {
                         </button>
                         {mostrarGeneralidades && (<div className='contenido-instrucciones'>
                             <p><b>Objetivo de esta aplicación</b></p>
-                            <p><b>Formular una ración lechera en forma sencilla y ágil, permitiendo su evaluación en términos físicos y económicos</b></p>
+                            <p><b>Formular raciones lecheras en forma sencilla y ágil, permitiendo su evaluación en términos físicos y económicos</b></p>
                             <p>La aplicación puede utilizarse para:</p>
                             <ul>
                                 <li>Evaluar resultados físicos y económicos de una ración real</li>

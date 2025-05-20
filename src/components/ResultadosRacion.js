@@ -222,7 +222,9 @@ function ResultadosRacion(props) {
                         reqPBProd={reqPBProd} reqPBTotal={reqPBTotal} alimentosRacion={alimentosRacion}
                         racionEMCons={racionEMCons} racionPBCons={racionPBCons} racionCE={racionCE} racionPB={racionPB}
                         racionMSCons={racionMSCons} racionMVOfrecida={racionMVOfrecida} racionMSPorciento={racionMSPorciento}
-                        racionMSOfrecida={racionMSOfrecida} racionAprPorciento={racionAprPorciento}
+                        racionMSOfrecida={racionMSOfrecida} racionAprPorciento={racionAprPorciento} consumoEstimado1={consumoEstimado1}
+                        consumoEstimado2={consumoEstimado2} forrajePorciento={forrajePorciento} concentradoPorciento={concentradoPorciento}
+                        variacionPeso = {variacionPeso} mensajeVariacionPeso = {mensajeVariacionPeso}
                     />} fileName="reporteResultadosFisicos.pdf">
                         {({ blob, url, loading, error }) => {
                             return loading ? (

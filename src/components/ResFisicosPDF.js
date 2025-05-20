@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     width: '65%',
     margin: 'auto',
     marginTop: '25px',
-    marginBottom: '25px',
+    marginBottom: '15px',
     textAlign: 'center',
   },
   table: {
@@ -43,13 +43,15 @@ const styles = StyleSheet.create({
   },
   title1: {
     textAlign: 'center',
+    marginTop: '3px',
+    marginBottom: '3px',
     fontWeight: 'bold',
     fontSize: '13',
   },
   title2: {
     textAlign: 'center',
-    marginTop: '4px',
-    marginBottom: '4px',
+    marginTop: '3px',
+    marginBottom: '3px',
     fontWeight: 'bold',
     fontSize: '10',
   },
@@ -110,6 +112,12 @@ function ResFisicosPDF(props) {
   const racionMSPorciento = props.racionMSPorciento;
   const racionMSOfrecida = props.racionMSOfrecida;
   const racionAprPorciento = props.racionAprPorciento;
+  const consumoEstimado1 = props.consumoEstimado1;
+  const consumoEstimado2 = props.consumoEstimado2;
+  const forrajePorciento = props.forrajePorciento;
+  const concentradoPorciento = props.concentradoPorciento;
+  const variacionPeso = props.variacionPeso;
+  const mensajeVariacionPeso = props.mensajeVariacionPeso;
 
   const fecha = new Date();
   const dia = fecha.getDate();
@@ -124,8 +132,9 @@ function ResFisicosPDF(props) {
           <Image src={LogoMiLecheria}></Image>
         </View>
 
+        <Text style={styles.title1}>Ración Lechera Simple</Text>
         <Text style={styles.title1}>{nombreCaso}</Text>
-        <Text style={styles.title2}>ANÁLISIS FÍSICO DE LA RACIÓN - Ración Lechera Simple - {fechaString}</Text>
+        <Text style={styles.title2}>ANÁLISIS FÍSICO DE LA RACIÓN - {fechaString}</Text>
 
         <Text style={styles.title3}>DATOS INGRESADOS POR EL USUARIO</Text>
         <Text style={styles.title3}>Datos de la vaca lechera</Text>
@@ -234,8 +243,9 @@ function ResFisicosPDF(props) {
           <Image src={LogoMiLecheria}></Image>
         </View>
 
+        <Text style={styles.title1}>Ración Lechera Simple</Text>
         <Text style={styles.title1}>{nombreCaso}</Text>
-        <Text style={styles.title2}>ANÁLISIS FÍSICO DE LA RACIÓN - Ración Lechera Simple - {fechaString}</Text>
+        <Text style={styles.title2}>ANÁLISIS FÍSICO DE LA RACIÓN - {fechaString}</Text>
 
         <Text style={styles.title3}>RESULTADOS</Text>
         <Text style={styles.title3}>Requerimientos - Necesidades nutricionales de la vaca lechera</Text>
@@ -313,8 +323,88 @@ function ResFisicosPDF(props) {
           </View>
         </View>
 
-        <Text style={styles.title3}>Título <View style={styles.tableCell3}><Image src={Check}></Image></View></Text>
-        
+        <Text style={styles.footer}>Ración Lechera Simple - Desarrolladores: Ing. Agr. EPL Francisco Candioti / Dr. Javier Baudracco</Text>
+        <View style={styles.tableLogos}>
+          <View style={styles.tableRow}>
+            <View style={styles.logoFooter}>
+              <Image src={LogoSaltoAgro}></Image>
+            </View>
+            <View style={styles.logoFooter}>
+              <Image src={LogoUNLFCA}></Image>
+            </View>
+          </View>
+        </View>
+      </Page>
+
+      <Page size="A4">
+        <View style={styles.logoHeader}>
+          <Image src={LogoMiLecheria}></Image>
+        </View>
+
+        <Text style={styles.title1}>Ración Lechera Simple</Text>
+        <Text style={styles.title1}>{nombreCaso}</Text>
+        <Text style={styles.title2}>ANÁLISIS FÍSICO DE LA RACIÓN - {fechaString}</Text>
+
+        <Text style={styles.title3}>RESUMEN DEL BALANCE</Text>
+        <Text style={styles.title3}><View style={styles.tableCell3}><Image src={Check}></Image></View> Consumo</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}><Text>Consumo ración</Text></View>
+            <View style={styles.tableCell2}><Text>Consumo estimado (1)</Text></View>
+            <View style={styles.tableCell2}><Text>Consumo estimado (2)</Text></View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}><Text>{racionMSCons} kgMS/día</Text></View>
+            <View style={styles.tableCell}><Text>{consumoEstimado1.toFixed(1)} kgMS/día</Text></View>
+            <View style={styles.tableCell}><Text>{consumoEstimado2.toFixed(1)} kgMS/día</Text></View>
+          </View>
+        </View>
+        <Text style={styles.plaintext}>(1) Estimación en base a factores del animal - (2) Estimación en base a factores del animal y de la ración</Text>
+
+        <Text style={styles.title3}><View style={styles.tableCell3}><Image src={Check}></Image></View> Relación Forraje : Concentrado</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}><Text>Proporción de forraje en la ración</Text></View>
+            <View style={styles.tableCell2}><Text>Proporción de concentrado en la ración</Text></View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}><Text>{forrajePorciento}% de la materia seca consumida</Text></View>
+            <View style={styles.tableCell}><Text>{concentradoPorciento}% de la materia seca consumida</Text></View>
+          </View>
+        </View>
+
+        <Text style={styles.title3}><View style={styles.tableCell3}><Image src={Check}></Image></View> Balance de Energía Metabólica</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}><Text>Energía Metabólica consumida</Text></View>
+            <View style={styles.tableCell2}><Text>Energía Metabólica requerida</Text></View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}><Text>{racionEMCons.toFixed(1)} MCalEM/día</Text></View>
+            <View style={styles.tableCell}><Text>{reqEMTotal.toFixed(1)} MCalEM/día</Text></View>
+          </View>
+        </View>
+
+        <Text style={styles.title3}><View style={styles.tableCell3}><Image src={Check}></Image></View> Balance de Proteína Bruta</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}><Text>Proteína Bruta consumida</Text></View>
+            <View style={styles.tableCell2}><Text>Proteína Bruta requerida</Text></View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}><Text>{racionPBCons.toFixed(1)} kgPB/día</Text></View>
+            <View style={styles.tableCell}><Text>{reqPBTotal.toFixed(1)} kgPB/día</Text></View>
+          </View>
+        </View>
+
+        <Text style={styles.title3}>VARIACIÓN DE PESO <View style={styles.tableCell3}></View></Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}><Text>{mensajeVariacionPeso}</Text></View>
+            <View style={styles.tableCell}><Text>{variacionPeso} kgPV/día</Text></View>
+          </View>
+        </View>
+
         <Text style={styles.footer}>Ración Lechera Simple - Desarrolladores: Ing. Agr. EPL Francisco Candioti / Dr. Javier Baudracco</Text>
         <View style={styles.tableLogos}>
           <View style={styles.tableRow}>

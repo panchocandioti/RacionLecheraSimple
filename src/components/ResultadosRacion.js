@@ -59,6 +59,7 @@ function ResultadosRacion(props) {
     const forrajePorciento = (racionMSForraje / racionMSCons * 100).toFixed(0);
     const concentradoPorciento = (100 - parseFloat(forrajePorciento)).toFixed(0);
     const metanoEmitidoKgDia = ((parseFloat(racionEMCons) / 0.82) / (parseFloat(racionCE / 3.6))) * (-10 * parseFloat(racionCE) / 3.6 + 12) / 1329;
+    const metanoEmitidoGramosDia = (parseFloat(metanoEmitidoKgDia) * 1000).toFixed(0);
     const metanoEmitidoGramosLitro = (metanoEmitidoKgDia * 1000 / parseFloat(produccionIndividual)).toFixed(1);
     const saldoEM = parseFloat(racionEMCons) - parseFloat(reqEMTotal);
     let kgananciaPeso;
@@ -68,6 +69,10 @@ function ResultadosRacion(props) {
     let mensajeVariacionPeso;
     if (saldoEM >= 0) { mensajeVariacionPeso = "Ganancia diaria de peso estimada" }
     else { mensajeVariacionPeso = "Pérdida diaria de peso estimada" };
+    const efConLitrosMSOf = (parseFloat(produccionIndividual) / parseFloat(racionMSOfrecida)).toFixed(2);
+    const efConLitrosMSCons = (parseFloat(produccionIndividual) / parseFloat(racionMSCons)).toFixed(2);
+    const efConSolidosMSOf = (parseFloat(produccionSolidos) / parseFloat(racionMSOfrecida) * 1000).toFixed(0);
+    const efConSolidosMSCons = (parseFloat(produccionSolidos) / parseFloat(racionMSCons) * 1000).toFixed(0);
 
     return (
         <div>
@@ -185,12 +190,12 @@ function ResultadosRacion(props) {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{(parseFloat(produccionIndividual) / parseFloat(racionMSOfrecida)).toFixed(2)} litros/kgMS</td>
-                                <td>{(parseFloat(produccionIndividual) / parseFloat(racionMSCons)).toFixed(2)} litros/kgMS</td>
+                                <td>{efConLitrosMSOf} litros/kgMS</td>
+                                <td>{efConLitrosMSCons} litros/kgMS</td>
                             </tr>
                             <tr>
-                                <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSOfrecida) * 1000).toFixed(0)} kgSU/tonMS (*)</td>
-                                <td>{(parseFloat(produccionSolidos) / parseFloat(racionMSCons) * 1000).toFixed(0)} kgSU/tonMS (*)</td>
+                                <td>{efConSolidosMSOf} kgSU/tonMS (*)</td>
+                                <td>{efConSolidosMSCons} kgSU/tonMS (*)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -209,7 +214,7 @@ function ResultadosRacion(props) {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{(parseFloat(metanoEmitidoKgDia) * 1000).toFixed(0)} gramos CH4/vaca día</td>
+                                <td>{metanoEmitidoGramosDia} gramos CH4/vaca día</td>
                                 <td>{metanoEmitidoGramosLitro} gramos CH4/litro producido</td>
                             </tr>
                         </tbody>
@@ -224,7 +229,9 @@ function ResultadosRacion(props) {
                         racionMSCons={racionMSCons} racionMVOfrecida={racionMVOfrecida} racionMSPorciento={racionMSPorciento}
                         racionMSOfrecida={racionMSOfrecida} racionAprPorciento={racionAprPorciento} consumoEstimado1={consumoEstimado1}
                         consumoEstimado2={consumoEstimado2} forrajePorciento={forrajePorciento} concentradoPorciento={concentradoPorciento}
-                        variacionPeso = {variacionPeso} mensajeVariacionPeso = {mensajeVariacionPeso}
+                        variacionPeso = {variacionPeso} mensajeVariacionPeso = {mensajeVariacionPeso} efConLitrosMSOf={efConLitrosMSOf}
+                        efConLitrosMSCons={efConLitrosMSCons} efConSolidosMSOf={efConSolidosMSOf} efConSolidosMSCons={efConSolidosMSCons}
+                        metanoEmitidoGramosDia={metanoEmitidoGramosDia} metanoEmitidoGramosLitro={metanoEmitidoGramosLitro}
                     />} fileName="reporteResultadosFisicos.pdf">
                         {({ blob, url, loading, error }) => {
                             return loading ? (

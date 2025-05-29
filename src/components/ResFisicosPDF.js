@@ -118,6 +118,12 @@ function ResFisicosPDF(props) {
   const concentradoPorciento = props.concentradoPorciento;
   const variacionPeso = props.variacionPeso;
   const mensajeVariacionPeso = props.mensajeVariacionPeso;
+  const efConLitrosMSOf = props.efConLitrosMSOf;
+  const efConLitrosMSCons = props.efConLitrosMSCons;
+  const efConSolidosMSOf = props.efConSolidosMSOf;
+  const efConSolidosMSCons = props.efConSolidosMSCons;
+  const metanoEmitidoGramosDia = props.metanoEmitidoGramosDia;
+  const metanoEmitidoGramosLitro = props.metanoEmitidoGramosLitro;
 
   const fecha = new Date();
   const dia = fecha.getDate();
@@ -397,7 +403,7 @@ function ResFisicosPDF(props) {
           </View>
         </View>
 
-        <Text style={styles.title3}>VARIACIÓN DE PESO <View style={styles.tableCell3}></View></Text>
+        <Text style={styles.title3}>VARIACIÓN DE PESO</Text>
         <View style={styles.table}>
           <View style={styles.tableRow}>
             <View style={styles.tableCell2}><Text>{mensajeVariacionPeso}</Text></View>
@@ -405,6 +411,35 @@ function ResFisicosPDF(props) {
           </View>
         </View>
 
+        <Text style={styles.title3}>EFICIENCIA DE CONVERSIÓN</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}><Text>Conversión sobre materia seca ofrecida</Text></View>
+            <View style={styles.tableCell2}><Text>Conversión sobre materia seca consumida</Text></View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}><Text>{efConLitrosMSOf} litros/kgMS ofrecida</Text></View>
+            <View style={styles.tableCell}><Text>{efConLitrosMSCons} litros/kgMS consumida</Text></View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}><Text>{efConSolidosMSOf} kgSU/kgMS ofrecida</Text></View>
+            <View style={styles.tableCell}><Text>{efConSolidosMSCons} kgSU/kgMS consumida</Text></View>
+          </View>
+        </View>
+        <Text style={styles.plaintext}>(*) Sólidos útiles (kgSU): Proteína láctea (kgPB) + Grasa Butirosa (kgGB)</Text>
+
+        <Text style={styles.title3}>EMISIÓN DE METANO ENTÉRICO</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}><Text>Metano entérico emitido por vaca diariamente</Text></View>
+            <View style={styles.tableCell2}><Text>Metano entérico emitido por litro producido</Text></View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}><Text>{metanoEmitidoGramosDia} gramos CH4/vaca día</Text></View>
+            <View style={styles.tableCell}><Text>{metanoEmitidoGramosLitro} gramos CH4/litro producido</Text></View>
+          </View>
+        </View>
+        
         <Text style={styles.footer}>Ración Lechera Simple - Desarrolladores: Ing. Agr. EPL Francisco Candioti / Dr. Javier Baudracco</Text>
         <View style={styles.tableLogos}>
           <View style={styles.tableRow}>

@@ -815,9 +815,9 @@ function GestionRacion(props) {
                 {(mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && !mostrarResEcon) && (
                     <button onClick={handleClick3}>VER RESULTADOS ECONÓMICOS</button>)}
                 {(mostrarResultados && validacionVaca && validacionAlimentos && mostrarIndEcon && validacionPrecioLeche && validacionPreciosAlimentos && mostrarResEcon) && (<div ref={resEconRef}>
-                    <ResultadosEconomicos alimentosRacion={alimentosRacion} precioLitro={precioLitro}
+                    <ResultadosEconomicos alimentosRacion={alimentosRacion} precioLitro={precioLitro} currency={currency}
                         precioKgSU={precioKgSU} codigoMoneda={codigoMoneda} decimales={decimales} racionMSCons={racionMSCons}
-                        produccionIndividual={produccionIndividual} lecheSolidos={lecheSolidos}
+                        produccionIndividual={produccionIndividual} lecheSolidos={lecheSolidos} nombreCaso={nombreCaso}
                     />
                 </div>)}
                 <hr></hr>

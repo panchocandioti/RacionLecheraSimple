@@ -6,11 +6,13 @@ import ResEconomicosPDF from './ResEconomicosPDF';
 
 function ResultadosEconomicos(props) {
 
+    const nombreCaso = props.nombreCaso;
     const alimentosRacion = props.alimentosRacion;
     const produccionIndividual = props.produccionIndividual;
     const lecheSolidos = props.lecheSolidos;
     const precioLitro = props.precioLitro;
     const precioKgSU = props.precioKgSU;
+    const currency = props.currency;
     const codigoMoneda = props.codigoMoneda;
     const decimales = props.decimales;
     const racionCosto = alimentosRacion.reduce((acumulador, alimento) => acumulador + (parseFloat(alimento.kgcons) * parseFloat(alimento.costokgcons)), 0);
@@ -135,7 +137,9 @@ function ResultadosEconomicos(props) {
                 precioLitro={precioLitro} decimales={decimales}
             />
             <div style={{ backgroundColor: "lightgray" }}>
-                <PDFDownloadLink document={<ResEconomicosPDF />} fileName="reporteResultadosEconomicos.pdf">
+                <PDFDownloadLink document={<ResEconomicosPDF nombreCaso={nombreCaso} currency={currency}
+                    codigoMoneda={codigoMoneda} precioLitro={precioLitro} precioKgSU={precioKgSU} lecheSolidos={lecheSolidos}
+                />} fileName="reporteResultadosEconomicos.pdf">
                     {({ blob, url, loading, error }) => {
                         return loading ? (
                             <button disabled>Cargando documento...</button>

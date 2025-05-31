@@ -39,6 +39,42 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     backgroundColor: 'lightgray',
   },
+  cellSmall: {
+    flexGrow: 0,
+    flexShrink: 1,
+    flexBasis: '20%', // columna angosta
+    padding: 2,
+    border: '1px solid #000',
+    textAlign: 'left',
+  },
+  cellSmall2: {
+    flexGrow: 0,
+    flexShrink: 1,
+    flexBasis: '20%', // columna angosta
+    padding: 2,
+    border: '1px solid #000',
+    textAlign: 'left',
+    fontWeight: 'bold',
+    backgroundColor: 'lightgray',
+  },
+  cellLarge: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: '30%', // columna que se puede expandir
+    padding: 2,
+    border: '1px solid #000',
+    textAlign: 'left',
+  },
+  cellLarge2: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: '30%', // columna que se puede expandir
+    padding: 2,
+    border: '1px solid #000',
+    textAlign: 'left',
+    fontWeight: 'bold',
+    backgroundColor: 'lightgray',
+  },
   tableCell3: {
     width: '5%',
     padding: 3,
@@ -214,19 +250,19 @@ function ResFisicosPDF(props) {
         <Text style={styles.title3}>Alimentos incluidos en la ración</Text>
         <View style={styles.table}>
           <View style={styles.tableRow}>
-            <View style={styles.tableCell2}><Text>Alimento</Text></View>
-            <View style={styles.tableCell2}><Text>Clasificación</Text></View>
-            <View style={styles.tableCell2}><Text>Materia Seca</Text></View>
-            <View style={styles.tableCell2}><Text>Conc. Energética</Text></View>
-            <View style={styles.tableCell2}><Text>Proteina Bruta</Text></View>
+            <View style={styles.cellLarge2}><Text>Alimento</Text></View>
+            <View style={styles.cellSmall2}><Text>Clasificación</Text></View>
+            <View style={styles.cellSmall2}><Text>Materia Seca</Text></View>
+            <View style={styles.cellSmall2}><Text>Conc. Energética</Text></View>
+            <View style={styles.cellSmall2}><Text>Proteina Bruta</Text></View>
           </View>
           {alimentosRacion.map((alimento) => (
             <View style={styles.tableRow}>
-              <View style={styles.tableCell}><Text>{alimento.nombre}</Text></View>
-              <View style={styles.tableCell}><Text>{alimento.clase}</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format(alimento.ms)}%</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format(alimento.ce)} MCalEM/kgMS</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format(alimento.pb)}%</Text></View>
+              <View style={styles.cellLarge}><Text>{alimento.nombre}</Text></View>
+              <View style={styles.cellSmall}><Text>{alimento.clase}</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.ms)}%</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.ce)} MCalEM/kgMS</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.pb)}%</Text></View>
             </View>)
           )}
         </View>
@@ -234,30 +270,30 @@ function ResFisicosPDF(props) {
         <Text style={styles.title3}>Cantidades ofrecidas en la ración</Text>
         <View style={styles.table}>
           <View style={styles.tableRow}>
-            <View style={styles.tableCell2}><Text>Alimento</Text></View>
-            <View style={styles.tableCell2}><Text>Ofrecido "Tal Cual"</Text></View>
-            <View style={styles.tableCell2}><Text>Materia Seca</Text></View>
-            <View style={styles.tableCell2}><Text>MS Ofrecida</Text></View>
-            <View style={styles.tableCell2}><Text>Aprovechado</Text></View>
-            <View style={styles.tableCell2}><Text>Consumo MS</Text></View>
+            <View style={styles.cellLarge2}><Text>Alimento</Text></View>
+            <View style={styles.cellSmall2}><Text>Ofrecido "Tal Cual"</Text></View>
+            <View style={styles.cellSmall2}><Text>Materia Seca</Text></View>
+            <View style={styles.cellSmall2}><Text>MS Ofrecida</Text></View>
+            <View style={styles.cellSmall2}><Text>Aprovechado</Text></View>
+            <View style={styles.cellSmall2}><Text>Consumo MS</Text></View>
           </View>
           {alimentosRacion.map((alimento) => (
             <View style={styles.tableRow} key={alimento.id}>
-              <View style={styles.tableCell}><Text>{alimento.nombre}</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format(alimento.kgtc)} kgTC</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format(alimento.ms)}%</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format(alimento.kgms)} kgMS</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format(alimento.apr)}%</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format(alimento.kgcons)} kgMS</Text></View>
+              <View style={styles.cellLarge}><Text>{alimento.nombre}</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.kgtc)} kgTC</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.ms)}%</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.kgms)} kgMS</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.apr)}%</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.kgcons)} kgMS</Text></View>
             </View>)
           )}
           <View style={styles.tableRow}>
-            <View style={styles.tableCell2}><Text>Ración global</Text></View>
-            <View style={styles.tableCell2}><Text>{new Intl.NumberFormat().format(racionMVOfrecida)} kgTC</Text></View>
-            <View style={styles.tableCell2}><Text>{new Intl.NumberFormat().format(racionMSPorciento)}%</Text></View>
-            <View style={styles.tableCell2}><Text>{new Intl.NumberFormat().format(racionMSOfrecida)} kgMS</Text></View>
-            <View style={styles.tableCell2}><Text>{new Intl.NumberFormat().format(racionAprPorciento)}%</Text></View>
-            <View style={styles.tableCell2}><Text>{new Intl.NumberFormat().format(racionMSCons)} kgMS</Text></View>
+            <View style={styles.cellLarge2}><Text>Ración global</Text></View>
+            <View style={styles.cellSmall2}><Text>{new Intl.NumberFormat().format(racionMVOfrecida)} kgTC</Text></View>
+            <View style={styles.cellSmall2}><Text>{new Intl.NumberFormat().format(racionMSPorciento)}%</Text></View>
+            <View style={styles.cellSmall2}><Text>{new Intl.NumberFormat().format(racionMSOfrecida)} kgMS</Text></View>
+            <View style={styles.cellSmall2}><Text>{new Intl.NumberFormat().format(racionAprPorciento)}%</Text></View>
+            <View style={styles.cellSmall2}><Text>{new Intl.NumberFormat().format(racionMSCons)} kgMS</Text></View>
           </View>
         </View>
 
@@ -335,27 +371,27 @@ function ResFisicosPDF(props) {
         <Text style={styles.title3}>Consumo - Nutrientes aportados por la ración</Text>
         <View style={styles.table}>
           <View style={styles.tableRow}>
-            <View style={styles.tableCell2}><Text>Alimento</Text></View>
-            <View style={styles.tableCell2}><Text>Energía Metabólica</Text></View>
-            <View style={styles.tableCell2}><Text>Proteína Bruta</Text></View>
-            <View style={styles.tableCell2}><Text>Concentración EM</Text></View>
-            <View style={styles.tableCell2}><Text>Concentración PB</Text></View>
+            <View style={styles.cellLarge2}><Text>Alimento</Text></View>
+            <View style={styles.cellSmall2}><Text>Energía Metabólica</Text></View>
+            <View style={styles.cellSmall2}><Text>Proteína Bruta</Text></View>
+            <View style={styles.cellSmall2}><Text>Concentración EM</Text></View>
+            <View style={styles.cellSmall2}><Text>Concentración PB</Text></View>
           </View>
           {alimentosRacion.map((alimento) => (
             <View style={styles.tableRow} key={alimento.id}>
-              <View style={styles.tableCell}><Text>{alimento.nombre}</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format((alimento.ce * alimento.kgcons).toFixed(1))} MCalEM/día</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format((alimento.pb * alimento.kgcons / 100).toFixed(2))} kgPB/día</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format(alimento.ce)} MCalEM/kgMS</Text></View>
-              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format(alimento.pb)}%</Text></View>
+              <View style={styles.cellLarge}><Text>{alimento.nombre}</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format((alimento.ce * alimento.kgcons).toFixed(1))} MCalEM/día</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format((alimento.pb * alimento.kgcons / 100).toFixed(2))} kgPB/día</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.ce)} MCalEM/kgMS</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.pb)}%</Text></View>
             </View>)
           )}
           <View style={styles.tableRow}>
-            <View style={styles.tableCell2}><Text>Ración global</Text></View>
-            <View style={styles.tableCell2}><Text>{new Intl.NumberFormat().format(racionEMCons.toFixed(1))} MCalEM/día</Text></View>
-            <View style={styles.tableCell2}><Text>{new Intl.NumberFormat().format(racionPBCons.toFixed(2))} kgPB/día</Text></View>
-            <View style={styles.tableCell2}><Text>{new Intl.NumberFormat().format((racionCE).toFixed(2))} MCalEM/kgMS</Text></View>
-            <View style={styles.tableCell2}><Text>{new Intl.NumberFormat().format((racionPB).toFixed(1))}%</Text></View>
+            <View style={styles.cellLarge2}><Text>Ración global</Text></View>
+            <View style={styles.cellSmall2}><Text>{new Intl.NumberFormat().format(racionEMCons.toFixed(1))} MCalEM/día</Text></View>
+            <View style={styles.cellSmall2}><Text>{new Intl.NumberFormat().format(racionPBCons.toFixed(2))} kgPB/día</Text></View>
+            <View style={styles.cellSmall2}><Text>{new Intl.NumberFormat().format((racionCE).toFixed(2))} MCalEM/kgMS</Text></View>
+            <View style={styles.cellSmall2}><Text>{new Intl.NumberFormat().format((racionPB).toFixed(1))}%</Text></View>
           </View>
         </View>
 

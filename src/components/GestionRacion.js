@@ -38,7 +38,7 @@ function GestionRacion(props) {
     const [precioKgSU, setPrecioKgSU] = useState(0);
     const [decimales, setDecimales] = useState(2);
     const [mostrarResEcon, setMostrarResEcon] = useState(false);
-    const [sistema, setSistema] = useState('');
+    const [sistema, setSistema] = useState('pastoreo');
     const [archivoActivo, setArchivoActivo] = useState("Ningún archivo seleccionado");
     const [nuevoNombre, setNuevoNombre] = useState("");
     const [nuevaMS, setNuevaMS] = useState(null);
@@ -431,7 +431,7 @@ function GestionRacion(props) {
                                 max="830"
                             />
                             <br />
-                            <div>
+                            <div id='sistema'>
                                 <label>
                                     <input
                                         className="radio"
@@ -439,6 +439,7 @@ function GestionRacion(props) {
                                         value="pastoreo"
                                         checked={sistema === 'pastoreo'}
                                         onChange={manejarCambio}
+
                                     />
                                     En pastoreo
                                 </label>

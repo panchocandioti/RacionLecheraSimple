@@ -36,6 +36,42 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     backgroundColor: 'lightgray',
   },
+  cellSmall: {
+    flexGrow: 0,
+    flexShrink: 1,
+    flexBasis: '20%', // columna angosta
+    padding: 2,
+    border: '1px solid #000',
+    textAlign: 'left',
+  },
+  cellSmall2: {
+    flexGrow: 0,
+    flexShrink: 1,
+    flexBasis: '20%', // columna angosta
+    padding: 2,
+    border: '1px solid #000',
+    textAlign: 'left',
+    fontWeight: 'bold',
+    backgroundColor: 'lightgray',
+  },
+  cellLarge: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: '30%', // columna que se puede expandir
+    padding: 2,
+    border: '1px solid #000',
+    textAlign: 'left',
+  },
+  cellLarge2: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: '30%', // columna que se puede expandir
+    padding: 2,
+    border: '1px solid #000',
+    textAlign: 'left',
+    fontWeight: 'bold',
+    backgroundColor: 'lightgray',
+  },
   tableCell3: {
     width: '5%',
     padding: 3,
@@ -95,6 +131,7 @@ function ResEconomicosPDF(props) {
   const precioLitro = props.precioLitro;
   const precioKgSU = props.precioKgSU;
   const lecheSolidos = props.lecheSolidos;
+  const alimentosRacion = props.alimentosRacion;
 
   const fecha = new Date();
   const dia = fecha.getDate();
@@ -114,7 +151,7 @@ function ResEconomicosPDF(props) {
         <Text style={styles.title2}>ANÁLISIS ECONÓMICO DE LA RACIÓN - {fechaString}</Text>
 
         <Text style={styles.title3}>DATOS INGRESADOS POR EL USUARIO</Text>
-        <Text style={styles.title3}>Moneda de trabajo: {currency} ({codigoMoneda})</Text>
+        <Text style={styles.title3}>Moneda de trabajo seleccionada: {currency} ({codigoMoneda})</Text>
         <Text style={styles.title3}>Valuación de la leche</Text>
         <View style={styles.table}>
           <View style={styles.tableRow}>
@@ -141,6 +178,41 @@ function ResEconomicosPDF(props) {
           </View>
         </View>
         <Text style={styles.plaintext}>(*) Sólidos útiles (kgSU): Proteína láctea (kgPB) + Grasa Butirosa (kgGB)</Text>
+
+        <Text style={styles.title3}>Valuación de los alimentos</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.cellLarge2}>
+              <Text>Alimento</Text>
+            </View>
+            <View style={styles.cellLarge2}>
+              <Text>Costo/kgTC Ofrecido</Text>
+            </View>
+            <View style={styles.cellSmall2}>
+              <Text>% Materia seca</Text>
+            </View>
+            <View style={styles.cellLarge2}>
+              <Text>Costo/kgMS Ofrecido</Text>
+            </View>
+            <View style={styles.cellSmall2}>
+              <Text>Aprovechado</Text>
+            </View>
+            <View style={styles.cellLarge2}>
+              <Text>Costo/kgMS Consumido</Text>
+            </View>
+          </View>
+          {alimentosRacion.map((alimento) => (
+            <View style={styles.tableRow}>
+              <View style={styles.cellLarge}><Text>{alimento.nombre}</Text></View>
+              <View style={styles.cellLarge}><Text>{new Intl.NumberFormat().format(alimento.costokgtc)} {codigoMoneda}/kgTC</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.ms)}%</Text></View>
+              <View style={styles.cellLarge}><Text>{new Intl.NumberFormat().format(alimento.costokgms)} {codigoMoneda}/kgMS</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.apr)}%</Text></View>
+              <View style={styles.cellLarge}><Text>{new Intl.NumberFormat().format(alimento.costokgcons)} {codigoMoneda}/kgMS</Text></View>
+            </View>)
+          )}
+        </View>
+
         <Text style={styles.footer}>Ración Lechera Simple - Desarrolladores: Ing. Agr. EPL Francisco Candioti / Dr. Javier Baudracco</Text>
         <View style={styles.tableLogos}>
           <View style={styles.tableRow}>

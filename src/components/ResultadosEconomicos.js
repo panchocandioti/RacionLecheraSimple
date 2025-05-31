@@ -139,6 +139,7 @@ function ResultadosEconomicos(props) {
             <div style={{ backgroundColor: "lightgray" }}>
                 <PDFDownloadLink document={<ResEconomicosPDF nombreCaso={nombreCaso} currency={currency}
                     codigoMoneda={codigoMoneda} precioLitro={precioLitro} precioKgSU={precioKgSU} lecheSolidos={lecheSolidos}
+                    alimentosRacion={alimentosRacion} 
                 />} fileName="reporteResultadosEconomicos.pdf">
                     {({ blob, url, loading, error }) => {
                         return loading ? (

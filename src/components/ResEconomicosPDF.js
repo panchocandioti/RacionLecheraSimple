@@ -132,6 +132,10 @@ function ResEconomicosPDF(props) {
   const precioKgSU = props.precioKgSU;
   const lecheSolidos = props.lecheSolidos;
   const alimentosRacion = props.alimentosRacion;
+  const racionMSCons = props.racionMSCons;
+  const decimales = props.decimales;
+  const racionCostoFormato = props.racionCostoFormato;
+  const racionCosto = props.racionCosto;
 
   const fecha = new Date();
   const dia = fecha.getDate();
@@ -211,6 +215,77 @@ function ResEconomicosPDF(props) {
               <View style={styles.cellLarge}><Text>{new Intl.NumberFormat().format(alimento.costokgcons)} {codigoMoneda}/kgMS</Text></View>
             </View>)
           )}
+        </View>
+
+        <Text style={styles.footer}>Ración Lechera Simple - Desarrolladores: Ing. Agr. EPL Francisco Candioti / Dr. Javier Baudracco</Text>
+        <View style={styles.tableLogos}>
+          <View style={styles.tableRow}>
+            <View style={styles.logoFooter}>
+              <Image src={LogoSaltoAgro}></Image>
+            </View>
+            <View style={styles.logoFooter}>
+              <Image src={LogoUNLFCA}></Image>
+            </View>
+          </View>
+        </View>
+
+      </Page>
+
+      <Page size="A4">
+        <View style={styles.logoHeader}>
+          <Image src={LogoMiLecheria}></Image>
+        </View>
+
+        <Text style={styles.title1}>Ración Lechera Simple</Text>
+        <Text style={styles.title1}>{nombreCaso}</Text>
+        <Text style={styles.title2}>ANÁLISIS ECONÓMICO DE LA RACIÓN - {fechaString}</Text>
+
+        <Text style={styles.title3}>RESULTADOS</Text>
+        <Text style={styles.title3}>Costo de la ración</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.cellLarge2}>
+              <Text>Alimento</Text>
+            </View>
+            <View style={styles.cellSmall2}>
+              <Text>MS Consumida</Text>
+            </View>
+            <View style={styles.cellSmall2}>
+              <Text>Costo/kgMS Consumida</Text>
+            </View>
+            <View style={styles.cellSmall2}>
+              <Text>Subtotal</Text>
+            </View>
+            <View style={styles.cellSmall2}>
+              <Text>% sobre costo ración</Text>
+            </View>
+          </View>
+          {alimentosRacion.map((alimento) => (
+            <View style={styles.tableRow}>
+              <View style={styles.cellLarge}><Text>{alimento.nombre}</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.kgcons)} kgMS</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(alimento.costokgcons)} {codigoMoneda}/kgMS</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format((parseFloat(alimento.kgcons) * parseFloat(alimento.costokgcons)).toFixed(decimales))} {codigoMoneda}</Text></View>
+              <View style={styles.cellSmall}><Text>{new Intl.NumberFormat().format(((parseFloat(alimento.kgcons) * parseFloat(alimento.costokgcons)) / parseFloat(racionCostoFormato) * 100).toFixed(1))}%</Text></View>
+            </View>)
+          )}
+          <View style={styles.tableRow}>
+            <View style={styles.cellLarge2}>
+              <Text>Ración global</Text>
+            </View>
+            <View style={styles.cellSmall2}>
+              <Text>{racionMSCons} kgMS</Text>
+            </View>
+            <View style={styles.cellSmall2}>
+              <Text>{(parseFloat(racionCosto) / parseFloat(racionMSCons)).toFixed(decimales)} {codigoMoneda}/kgMS</Text>
+            </View>
+            <View style={styles.cellSmall2}>
+              <Text>{racionCostoFormato} {codigoMoneda}</Text>
+            </View>
+            <View style={styles.cellSmall2}>
+              <Text>100%</Text>
+            </View>
+          </View>
         </View>
 
         <Text style={styles.footer}>Ración Lechera Simple - Desarrolladores: Ing. Agr. EPL Francisco Candioti / Dr. Javier Baudracco</Text>

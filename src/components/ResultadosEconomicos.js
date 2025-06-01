@@ -140,7 +140,8 @@ function ResultadosEconomicos(props) {
                 <PDFDownloadLink document={<ResEconomicosPDF nombreCaso={nombreCaso} currency={currency}
                     codigoMoneda={codigoMoneda} precioLitro={precioLitro} precioKgSU={precioKgSU} lecheSolidos={lecheSolidos}
                     alimentosRacion={alimentosRacion} racionMSCons={racionMSCons} decimales={decimales}
-                    racionCostoFormato={racionCostoFormato} racionCosto={racionCosto}
+                    racionCostoFormato={racionCostoFormato} racionCosto={racionCosto} racionCE={racionCE}
+                    racionPB={racionPB}
                 />} fileName="reporteResultadosEconomicos.pdf">
                     {({ blob, url, loading, error }) => {
                         return loading ? (

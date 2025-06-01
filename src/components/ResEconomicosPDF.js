@@ -136,6 +136,8 @@ function ResEconomicosPDF(props) {
   const decimales = props.decimales;
   const racionCostoFormato = props.racionCostoFormato;
   const racionCosto = props.racionCosto;
+  const racionCE = props.racionCE;
+  const racionPB = props.racionPB;
 
   const fecha = new Date();
   const dia = fecha.getDate();
@@ -274,16 +276,49 @@ function ResEconomicosPDF(props) {
               <Text>Ración global</Text>
             </View>
             <View style={styles.cellSmall2}>
-              <Text>{racionMSCons} kgMS</Text>
+              <Text>{new Intl.NumberFormat().format(racionMSCons)} kgMS</Text>
             </View>
             <View style={styles.cellSmall2}>
-              <Text>{(parseFloat(racionCosto) / parseFloat(racionMSCons)).toFixed(decimales)} {codigoMoneda}/kgMS</Text>
+              <Text>{new Intl.NumberFormat().format((parseFloat(racionCosto) / parseFloat(racionMSCons)).toFixed(decimales))} {codigoMoneda}/kgMS</Text>
             </View>
             <View style={styles.cellSmall2}>
-              <Text>{racionCostoFormato} {codigoMoneda}</Text>
+              <Text>{new Intl.NumberFormat().format(racionCostoFormato)} {codigoMoneda}</Text>
             </View>
             <View style={styles.cellSmall2}>
               <Text>100%</Text>
+            </View>
+          </View>
+        </View>
+
+        <Text style={styles.title3}>Costo de los nutrientes</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}>
+              <Text>Alimento</Text>
+            </View>
+            <View style={styles.tableCell2}>
+              <Text>Costo/MCalEM Consumida</Text>
+            </View>
+            <View style={styles.tableCell2}>
+              <Text>Costo/kgPB Consumida</Text>
+            </View>
+          </View>
+          {alimentosRacion.map((alimento) => (
+            <View style={styles.tableRow}>
+              <View style={styles.tableCell}><Text>{alimento.nombre}</Text></View>
+              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format((parseFloat(alimento.costokgcons) / parseFloat(alimento.ce)).toFixed(decimales))} {codigoMoneda}/MCalEM</Text></View>
+              <View style={styles.tableCell}><Text>{new Intl.NumberFormat().format((parseFloat(alimento.costokgcons) / parseFloat(alimento.pb) * 100).toFixed(decimales))} {codigoMoneda}/kgPB</Text></View>
+            </View>)
+          )}
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}>
+              <Text>Ración global</Text>
+            </View>
+            <View style={styles.tableCell2}>
+              <Text>{new Intl.NumberFormat().format(((parseFloat(racionCosto) / parseFloat(racionMSCons)) / parseFloat(racionCE)).toFixed(decimales))} {codigoMoneda}/MCalEM</Text>
+            </View>
+            <View style={styles.tableCell2}>
+              <Text>{new Intl.NumberFormat().format(((parseFloat(racionCosto) / parseFloat(racionMSCons)) / parseFloat(racionPB) * 100).toFixed(decimales))} {codigoMoneda}/kgPB</Text>
             </View>
           </View>
         </View>

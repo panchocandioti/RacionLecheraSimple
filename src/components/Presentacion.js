@@ -93,6 +93,14 @@ function Presentacion() {
                             </ol>
                             <p>Los valores ingresados podrán cambiarse en cualquier momento.</p>
                             <p>La calidad de la información ingresada por el usuario es su entera responsabilidad y condiciona la calidad de los resultados obtenidos.</p>
+                            <hr></hr>
+                            <p><b>Fuentes bibliográficas:</b></p>
+                            <p>Cálculo de requerimientos energéticos y proteicos del ganado bovino lechero (2. ed.). Castillo, A. R., Melo, O. E., & Boetto, G. C. (1998).</p>
+                            <p>Prediction of herbage dry matter intake for dairy cows grazing ryegrass-based pastures. J. Baudracco, N. López-Villalobos, C.W. Holmes and K.A. MacDonald(2010).</p>
+                            <p>Nutrient Requirements of Dairy Cattle: 5th Revised Edition. National Research Council (1978).</p>
+                            <p>Nutrient Requirements of Dairy Cattle: 6th Revised Edition. National Research Council (1989).</p>
+                            <p>Nutrient Requirements of Dairy Cattle: 7th Revised Edition. National Research Council (2001).</p>
+                            <p>Nutrient Requirements of Dairy Cattle: 8th Revised Edition. National Academies of Sciences, Engineering, and Medicine (2021).</p>
                         </div>)}
                         <br></br>
                         <button onClick={manejarOnClick4} className='mostrar'>
@@ -173,29 +181,29 @@ function Presentacion() {
                     <BotonReset />
                 </div>)}
                 <footer className='footer'>
-                <div>
-                    <p>Convenio Marco de Cooperación Técnico-Científica:</p>
-                    <p><b>Universidad Nacional del Litoral - SALTO AGRO S.S.</b></p>
-                    <hr></hr>
-                    <p>Desarrolladores:</p>
+                    <div>
+                        <p>Convenio Marco de Cooperación Técnico-Científica:</p>
+                        <p><b>Universidad Nacional del Litoral - SALTO AGRO S.S.</b></p>
+                        <hr></hr>
+                        <p>Desarrolladores:</p>
+                        <div className='containerLogos'>
+                            <div className='desarrolladores'>
+                                <p><b><a href='https://www.linkedin.com/in/francisco-candioti-0b167834/' target="_blank" rel="noopener noreferrer">Ing. Agr. EPL Francisco Candioti</a></b></p>
+                            </div>
+                            <div className='desarrolladores'>
+                                <p><b><a href='https://ar.linkedin.com/in/javier-baudracco-b97aab15' target="_blank" rel="noopener noreferrer">Dr. Javier Baudracco</a></b></p>
+                            </div>
+                        </div>
+                    </div>
                     <div className='containerLogos'>
-                        <div className='desarrolladores'>
-                            <p><b><a href='https://www.linkedin.com/in/francisco-candioti-0b167834/' target="_blank" rel="noopener noreferrer">Ing. Agr. EPL Francisco Candioti</a></b></p>
+                        <div className='logos'>
+                            <img src={LogoSaltoAgro} className='logo' alt='LogoSalto'></img>
                         </div>
-                        <div className='desarrolladores'>
-                            <p><b><a href='https://ar.linkedin.com/in/javier-baudracco-b97aab15' target="_blank" rel="noopener noreferrer">Dr. Javier Baudracco</a></b></p>
+                        <div className='logos'>
+                            <img src={LogoUNLFCA} className='logo' alt='LogoUNLFCA'></img>
                         </div>
                     </div>
-                </div>
-                <div className='containerLogos'>
-                    <div className='logos'>
-                        <img src={LogoSaltoAgro} className='logo' alt='LogoSalto'></img>
-                    </div>
-                    <div className='logos'>
-                        <img src={LogoUNLFCA} className='logo' alt='LogoUNLFCA'></img>
-                    </div>
-                </div>
-            </footer>
+                </footer>
             </div>
         </div>
     )

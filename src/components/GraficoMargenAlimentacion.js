@@ -22,30 +22,30 @@ function GraficoMargenAlimentacion(props) {
     const [costoAlimentacion, setCostoAlimentacion] = useState(racionCosto);
 
     const handleClickMoneda = () => {
-        setUnidad(codigoMoneda);
+        setUnidad((codigoMoneda + "/vaca día"));
         setDecimales2(decimales);
     };
 
     const handleClickLitros = () => {
-        setUnidad("Litros");
+        setUnidad("litros/vaca día");
         setDecimales2(1);
     };
 
     const handleClickPorcentaje = () => {
-        setUnidad("% sobre ingreso leche");
+        setUnidad("% sobre ingresos leche");
         setDecimales2(1);
     };
 
     useEffect(() => {
-        if (unidad === codigoMoneda) {
+        if (unidad === (codigoMoneda + "/vaca día")) {
             setMargenSobreAlimentacion(racionMargen);
             setCostoAlimentacion(racionCosto);
         }
-        if (unidad === "Litros") {
+        if (unidad === "litros/vaca día") {
             setMargenSobreAlimentacion(racionMargenLitros);
             setCostoAlimentacion(racionCostoLitros);
         }
-        if (unidad === "% sobre ingreso leche") {
+        if (unidad === "% sobre ingresos leche") {
             setMargenSobreAlimentacion(racionMargenPorciento);
             setCostoAlimentacion(racionCostoPorciento);
         }

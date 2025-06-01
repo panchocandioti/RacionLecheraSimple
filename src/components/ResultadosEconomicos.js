@@ -141,7 +141,7 @@ function ResultadosEconomicos(props) {
                     codigoMoneda={codigoMoneda} precioLitro={precioLitro} precioKgSU={precioKgSU} lecheSolidos={lecheSolidos}
                     alimentosRacion={alimentosRacion} racionMSCons={racionMSCons} decimales={decimales}
                     racionCostoFormato={racionCostoFormato} racionCosto={racionCosto} racionCE={racionCE}
-                    racionPB={racionPB}
+                    racionPB={racionPB} produccionIndividual={produccionIndividual} ingresoLeche={ingresoLeche}
                 />} fileName="reporteResultadosEconomicos.pdf">
                     {({ blob, url, loading, error }) => {
                         return loading ? (

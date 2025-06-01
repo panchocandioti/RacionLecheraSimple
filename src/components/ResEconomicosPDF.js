@@ -138,6 +138,14 @@ function ResEconomicosPDF(props) {
   const racionCosto = props.racionCosto;
   const racionCE = props.racionCE;
   const racionPB = props.racionPB;
+  const produccionIndividual = props.produccionIndividual;
+  const ingresoLeche = props.ingresoLeche;
+
+  const racionMargen = (parseFloat(ingresoLeche) - parseFloat(racionCosto)).toFixed(decimales);
+  const racionCostoLitros = (parseFloat(racionCosto) / parseFloat(precioLitro)).toFixed(1);
+  const racionMargenLitros = (parseFloat(racionMargen) / parseFloat(precioLitro)).toFixed(1);
+  const racionCostoPorciento = (parseFloat(racionCosto) / parseFloat(ingresoLeche) * 100).toFixed(1);
+  const racionMargenPorciento = (parseFloat(racionMargen) / parseFloat(ingresoLeche) * 100).toFixed(1);
 
   const fecha = new Date();
   const dia = fecha.getDate();
@@ -334,7 +342,112 @@ function ResEconomicosPDF(props) {
             </View>
           </View>
         </View>
+      </Page>
 
+      <Page size="A4">
+        <View style={styles.logoHeader}>
+          <Image src={LogoMiLecheria}></Image>
+        </View>
+
+        <Text style={styles.title1}>Ración Lechera Simple</Text>
+        <Text style={styles.title1}>{nombreCaso}</Text>
+        <Text style={styles.title2}>ANÁLISIS ECONÓMICO DE LA RACIÓN - {fechaString}</Text>
+
+        <Text style={styles.title3}>INGRESOS POR LECHE</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}>
+              <Text>Unidades producidas</Text>
+            </View>
+            <View style={styles.tableCell2}>
+              <Text>Precio unitario</Text>
+            </View>
+            <View style={styles.tableCell2}>
+              <Text>Ingresos por leche</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(produccionIndividual)} litros diarios/vaca</Text>
+            </View>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(parseFloat(precioLitro).toFixed(decimales))} {codigoMoneda}/litro</Text>
+            </View>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(parseFloat(ingresoLeche).toFixed(decimales))} {codigoMoneda} diarios/vaca</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format((parseFloat(produccionIndividual) * parseFloat(lecheSolidos) / 100).toFixed(4))} kgSU diarios/vaca</Text>
+            </View>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(precioKgSU)} {codigoMoneda}/kgSU</Text>
+            </View>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(ingresoLeche)} {codigoMoneda} diarios/vaca</Text>
+            </View>
+          </View>
+        </View>
+
+        <Text style={styles.title3}>MARGEN SOBRE ALIMENTACIÓN</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell2}>
+              <Text>Ingresos por leche</Text>
+            </View>
+            <View style={styles.tableCell2}>
+              <Text>Costo de alimentación</Text>
+            </View>
+            <View style={styles.tableCell2}>
+              <Text>Margen sobre alimentación</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(ingresoLeche)} {codigoMoneda} diarios/vaca</Text>
+            </View>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(racionCostoFormato)} {codigoMoneda} diarios/vaca</Text>
+            </View>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(racionMargen)} {codigoMoneda} diarios/vaca</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(produccionIndividual)} litros diarios/vaca</Text>
+            </View>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(racionCostoLitros)} litros diarios/vaca</Text>
+            </View>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(racionMargenLitros)} litros diarios/vaca</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCell}>
+              <Text>100% sobre ingresos leche</Text>
+            </View>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(racionCostoPorciento)}% sobre ingresos leche</Text>
+            </View>
+            <View style={styles.tableCell}>
+              <Text>{new Intl.NumberFormat().format(racionMargenPorciento)}% sobre ingresos leche</Text>
+            </View>
+          </View>
+        </View>
+        <Text style={styles.footer}>Ración Lechera Simple - Desarrolladores: Ing. Agr. EPL Francisco Candioti / Dr. Javier Baudracco</Text>
+        <View style={styles.tableLogos}>
+          <View style={styles.tableRow}>
+            <View style={styles.logoFooter}>
+              <Image src={LogoSaltoAgro}></Image>
+            </View>
+            <View style={styles.logoFooter}>
+              <Image src={LogoUNLFCA}></Image>
+            </View>
+          </View>
+        </View>
       </Page>
     </Document>
   )

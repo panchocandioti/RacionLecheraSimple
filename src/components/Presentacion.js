@@ -101,6 +101,7 @@ function Presentacion() {
                             <p>Nutrient Requirements of Dairy Cattle: 6th Revised Edition. National Research Council (1989).</p>
                             <p>Nutrient Requirements of Dairy Cattle: 7th Revised Edition. National Research Council (2001).</p>
                             <p>Nutrient Requirements of Dairy Cattle: 8th Revised Edition. National Academies of Sciences, Engineering, and Medicine (2021).</p>
+                            <p>OLE! Dairy model: Description and evaluation of the biophysical components of a whole farm simulation model for pastoral-based dairy systems. Llanos E, Candioti F, Stirling S, Cajarville C, Fariña S, Diéguez F. (2024)</p>
                         </div>)}
                         <br></br>
                         <button onClick={manejarOnClick4} className='mostrar'>

@@ -14,9 +14,9 @@ function GraficoForrajeConcentrado(props) {
     const [icon, setIcon] = useState(null);
 
     useEffect(() => {
-        if (forraje >= 50) setIcon(1);
-        if (forraje < 30) setIcon(-1);
-        if (forraje >= 30 && forraje < 50) setIcon(0);
+        if (forraje >= 55) setIcon(1);
+        if (forraje < 35) setIcon(-1);
+        if (forraje >= 35 && forraje < 55) setIcon(0);
     }, [forraje]);
 
     const data = {

@@ -182,8 +182,8 @@ function ResFisicosPDF(props) {
   }, [racionMSCons, consumoEstimado1, consumoEstimado2]);
 
   useEffect(() => {
-          if (parseFloat(forrajePorciento) >= 50) {setIconForrConc(check_icon)}
-          else if (parseFloat(forrajePorciento) < 30) {setIconForrConc(wrong_icon)}
+          if (parseFloat(forrajePorciento) >= 55) {setIconForrConc(check_icon)}
+          else if (parseFloat(forrajePorciento) < 35) {setIconForrConc(wrong_icon)}
           else {setIconForrConc(caution_icon)};
       }, [forrajePorciento]);
 
